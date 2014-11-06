@@ -7,13 +7,53 @@ window.onload = function(){
 		// Plats för förändring.		
 		// Returnera den konverterade strängen.
 		// Vid fel, kasta ett undantag med ett meddelande till användaren. 
+		
+		if(isNaN(str)){
+			console.log("inte number");
+		}else {
+			console.log("number");
+		}
+			
+		var charer;
 	
-
-
-
-
-
-
+		
+		//var p = str.replace("a", "#");
+		//console.log(p);
+		var p = "";
+		var lower = "";
+		var upper = "";
+		var total = "";
+		for (var i = 0; i < str.length; i++) {
+			
+			//charer = str[i];
+			
+			p += str[i].replace(/\a|\A/g,"#");
+			
+			if(str[i] == str[i].toUpperCase() ){
+				//p[i].toLowerCase();	
+				//console.log(p[i] + "hej");
+				total += p[i].toLowerCase();
+				//total += lower;
+				//p[i] = str[i].toLowerCase();
+				
+				//p = p[i].replace(p[i].toUpperCase(), p[i].toLowerCase()).replace(p[i].toLowerCase(), p[i].toUpperCase());
+				//console.log(p);
+				
+				//str[i].replace();
+				
+			}else{
+				//
+				total += p[i].toUpperCase();
+				//total += upper;
+				//p[i] = str[i].toUpperCase();
+				//p[i] = p[i].replace(p[i].toLowerCase(), p[i].toUpperCase());
+			}
+			
+			
+		}
+		//console.log(lower);
+		//console.log(upper);
+		return total;
 	};
 	// ------------------------------------------------------------------------------
 
