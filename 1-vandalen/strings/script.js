@@ -13,12 +13,7 @@ window.onload = function(){
 		}else {
 			console.log("number");
 		}
-			
-		var charer;
-	
 		
-		//var p = str.replace("a", "#");
-		//console.log(p);
 		var p = "";
 		var total = "";
 		
