@@ -8,7 +8,7 @@ window.onload = function(){
 
 			console.log(date);
 			// Din kod här.
-			if(!isNaN(new Date(date).getTime())){
+			if(!isNaN(new Date(date).getTime())){ // kollar om det är fel format.
 				
 				var birth = new Date(date);	
 				
@@ -29,11 +29,7 @@ window.onload = function(){
 			}
 			
 			throw new Error('Feel du måste ange ÅÅÅÅ-MM-DD');
-
-			
-			
-			
-			
+		
 			
 	};
 	// ------------------------------------------------------------------------------
