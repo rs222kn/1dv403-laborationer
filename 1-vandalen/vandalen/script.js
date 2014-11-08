@@ -4,52 +4,27 @@ var makePerson = function(persArr){
 
 
 	// Din kod här...
-	//console.log(persArr); 
-    /*
-    var nameArray = [];
-    var nameString = "";
-                                                    ALLT = FEEEEL
-   var minValueArr = [];
-   var ValueArr = [];
-   
-   var sum = 0;
-   
-   function loop(){
-       for (var i = 0; i < persArr.length; i++) {
-            ValueArr[i] = persArr[i].age;
-            sum += ValueArr[i]; 
-        }
-   }
-   console.log("hej " + loop());
-   
+	//console.log(persArr);
+
+
    var obj = {
-        minAge: function(){
-             
-            return ValueArr.min();
+        minAge: function(){// return Math.min.apply( Math, array );
+
+            return Math.min.apply(Math,persArr.map(function(persArr){return persArr.age}));
         },
         maxAge: function(){
-            
-            return ValueArr.max();
+            return Math.max.apply(Math,persArr.map(function(persArr){return persArr.age}));
         },
         averageAge: function(){
-            return sum/ValueArr.length;
+            return Math.round(persArr.map(function(persArr){return persArr.age}).reduce(function(a,b){return a+b })/ persArr.length);
         },
-        names: function(){
-            //persArr.sort();
-            for (var i = 0; i < persArr.length; i++) {
-                
-                nameArray[i] = persArr[i].name;
-            }
-            nameArray.sort();
-            nameString  = nameArray.join(", ");
-            console.log(g);
-            return nameString;
-           
-        } 
+        names: function() {
+            return persArr.map(function(persArr){return persArr.name}).sort(function(a,b){return a.localeCompare(b)}).join(", ").toString();
+        }
    };
-    //console.log(obj.names());
-    return obj;
-    */
+    console.log(obj.minAge());
+    //return obj;
+    return {minAge: obj.minAge(),maxAge: obj.maxAge(),averageAge: obj.averageAge(), names: obj.names()};
 }
 
 var data = [{name: "John Häggerud", age: 37}, {name: "Johan Leitet", age: 36}, {name: "Mats Loock", age: 46}];
