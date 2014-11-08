@@ -2,10 +2,22 @@
 
 var makePerson = function(persArr){
 
-
+    for (var i = 0; i < persArr.length; i++) {
+        
+        if(typeof(persArr[i].name) !== 'string'){
+            console.log("InteString");
+        }else{
+            //console.log("ärString");
+        }
+        if(typeof(persArr[i].age) !== 'number'){
+            persArr[i].age = 0;
+            console.log("feeel");
+        }else{
+            console.log("ärNr");
+        }
+    }
+    
 	// Din kod här...
-	//console.log(persArr);
-
 
    var obj = {
         minAge: function(){// return Math.min.apply( Math, array );
@@ -22,8 +34,6 @@ var makePerson = function(persArr){
             return persArr.map(function(persArr){return persArr.name}).sort(function(a,b){return a.localeCompare(b)}).join(", ").toString();
         }
    };
-    console.log(obj.minAge());
-    //return obj;
     return {minAge: obj.minAge(),maxAge: obj.maxAge(),averageAge: obj.averageAge(), names: obj.names()};
 }
 
