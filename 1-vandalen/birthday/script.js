@@ -5,10 +5,9 @@ window.onload = function(){
 	
 	var birthday = function(date){
 		
-
-			console.log(date);
+			//console.log(date);
 			// Din kod här.
-			if(!isNaN(new Date(date).getTime())){ // kollar om det är fel format.
+			/*if(!isNaN(new Date(date).getTime())){ // kollar om det är fel format.
 				
 				var birth = new Date(date);	
 				
@@ -27,10 +26,30 @@ window.onload = function(){
 				var toNextDay = Math.floor((birth - today) / (oneDay));
 				return toNextDay;
 			}
-			
-			throw new Error('Feel du måste ange ÅÅÅÅ-MM-DD');
+			*/
+			//throw new Error('Feel du måste ange ÅÅÅÅ-MM-DD');
 		
+			try{ 
+				var birth = new Date(date); 
+				
+			}catch(err){
+				throw new Error('Feel du måste ange ÅÅÅÅ-MM-DD');
+			}
 			
+			var today = new Date();
+		
+			var oneDay=1000*60*60*24; 
+			
+			birth.setFullYear(today.getFullYear());
+			
+			today.setDate(today.getDate()-1); // tar bort fel marginal på en dag.
+			
+			if(today > birth){ // kollar om man redan fyllt år. 
+				birth.setFullYear(today.getFullYear()+1); 
+			}
+			
+			var toNextDay = Math.floor((birth - today) / (oneDay));
+			return toNextDay;
 	};
 	// ------------------------------------------------------------------------------
 
