@@ -1,8 +1,5 @@
 "use strict";
 
-
-
-var count = 0;
 var MessageBoard = {
     
     doc:{
@@ -10,8 +7,10 @@ var MessageBoard = {
         txt: document.getElementById("txt"),
         antmess: document.getElementById("antMessage"),
         div: document.getElementById("messagearea"),
+        count: 0
     
     },
+    
     messages: [],
     
     init: function(e){
@@ -71,7 +70,7 @@ var MessageBoard = {
     },
     renderMessage: function(messageID){
         var nr = messageID+1; // bugg om man tar bort alla medelanden så står det fortfarande 1
-        MessageBoard.doc.antmess.innerHTML = "antal medelanden : " + nr; // skriver ut antal medelanden.
+        MessageBoard.doc.antmess.innerHTML = "Antal medelanden: " + nr; // skriver ut antal medelanden.
         
         var createElemnts = {
             newMessege: document.createElement("div"), // div taggarna medelanderna kommer va i
@@ -118,15 +117,13 @@ var MessageBoard = {
         });
         
         
-        MessageBoard.renderAiMessage(count);
-        count++;
+        MessageBoard.renderAiMessage(MessageBoard.doc.count);
+        MessageBoard.doc.count++;
     },
     removeMessage: function(messageID){
         MessageBoard.messages.splice(messageID, 1);
         MessageBoard.renderMessages();
     }
 };
-    
-    
-      
+
 window.onload = MessageBoard.init;
