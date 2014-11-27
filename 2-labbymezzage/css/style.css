@@ -1,22 +1,126 @@
-#messegelist{
-    list-style: none;
-    margin:0;
-    padding:0;
-}
-
+/* container for message */
 .message{
+    margin-left: 20px;
     padding: 6px;
-    margin:6px;
-    height:100px;
-    width: 200px;
-    color: #FFFFFF;
+    min-height: 64px;
+    margin-bottom: 6px;
+    margin-top: 6px;
+    width: 300px;
+    position: relative;
     background-color: #D15F56;
 }
-
+/* arraw */
+.message:after {
+	right: 100%;
+	top: 78%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-right-color: #D15F56;
+	border-width: 10px;
+	margin-top: -10px;
+}
+/* mesasge text */
+.messageText{
+    
+    font-family: 'Roboto', sans-serif;
+    color: #FFFFFF;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 4px;
+    margin-right: 40px;
+}
+/* time stamp text on message */
 .pdate{
+    font-family: 'Roboto', sans-serif;
     font-size: 10px;
+    margin: 0;
+    padding:0;
+    margin-right: 40px;
 }
 
 #holder{
+    width: 360px;
+    border: solid 2px;
+}
+#messagearea{
+    margin: 4px;
+    border: solid 1px;
+}
+/* img buttins (clock/remove)*/
+.imgBtn{
+    height: 20px;
+    width: 20px;
+    margin:0;
+    padding: 0;
+    float:right;
+}
+
+#txt{
+    font-family: 'Roboto', sans-serif;
+    margin-left:4px;
     width: 300px;
+	height:50px;
+	border:1px solid #D15F56;
+}
+#send{
+    font-family: 'Roboto', sans-serif;
+    float:right;
+    position:relative;
+    height:56px;
+	width:46px;
+	background-color:#ededed;
+	margin-right: 4px;
+}
+#send:hover {
+	background-color:#dfdfdf;
+}
+#send:focus{
+    outline:0 !important;
+}
+#antMessage{
+    font-family: 'Roboto', sans-serif;
+    
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+    margin-left: 4px;
+    margin-bottom: 4px;
+    
+}
+
+#controls{
+    
+}
+
+
+
+/*Aimesage*/
+/* container for message */
+.aimessage{
+    margin-left: 20px;
+    padding: 6px;
+    min-height: 64px;
+    margin-bottom: 6px;
+    margin-top: 6px;
+    width: 300px;
+    position: relative;
+    background-color: #59C0D1;
+}
+/* arraw */
+.aimessage:after {
+	left: 100%;
+	top: 78%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-left-color: #59C0D1;
+	border-width: 10px;
+	margin-top: -10px;
 }

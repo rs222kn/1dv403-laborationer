@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8" />
  	<title>MSN</title>
+ 	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
     <body>
@@ -11,15 +12,20 @@
         </header>
         <main>
             <p id="antmessage"></p>
-            <div ="holder">
+            <div id="holder">
                 <div id="messagearea">
                     
                 </div>
+                <div id="controls">
+                <p id="antMessage" >antal medelanden : </p>
+                
+     		        <textarea id="txt" name="textarea" placeholder="Skriv här!" ></textarea>
+     		        <input type="submit" name="bnt" id="send" value="Skicka"/>
+     		    </div>
      		</div>
-     		<p id="antMessage" ></p>
-     		<textarea id="txt" name="textarea" placeholder="Skriv här!" ></textarea><br>
-     		<input type="submit" name="bnt" id="send" value="Skicka"/>
+     		
         </main>
+        <script src="js/Aimessage.js"></script>
         <script src="js/Message.js"></script>
         <script src="js/MessageBoard.js"></script>
     </body>
