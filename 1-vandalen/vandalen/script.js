@@ -4,22 +4,22 @@ var makePerson = function(persArr){
 
     for (var i = 0; i < persArr.length; i++) {
         
+        // checkar om man motaget data är i rätt form
         if(typeof(persArr[i].name) !== 'string'){
             console.log("InteString");
         }else{
             //console.log("ärString");
         }
         if(typeof(persArr[i].age) !== 'number'){
-            persArr[i].age = 0;
+            //persArr[i].age = 0;
             console.log("feeel");
         }else{
-            console.log("ärNr");
+            //console.log("ärNr");
         }
     }
-    
-	// Din kod här...
 
-   var obj = {
+    // skapar ett objekt som inehåller x antal funktioner med uträkningar 
+   var obj = { 
         minAge: function(){// return Math.min.apply( Math, array );
 
             return Math.min.apply(Math,persArr.map(function(persArr){return persArr.age}));

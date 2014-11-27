@@ -7,7 +7,7 @@ window.onload = function(){
 	var max = 100;
 	var count = 0;
 	
-	var secret = Math.floor( Math.random() * (max-min)+1 )+min; Math.floor( Math.random() * (100-1)+1) + 1; Math.floor( Math.random() * 100)+1; // slumpat tal.
+	var secret = Math.floor( Math.random() * 100)+1; // slumpat tal.
 
 	// I denna funktion ska du skriva koden för att hantera "spelet"
 	var guess = function(number){

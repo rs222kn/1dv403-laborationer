@@ -8,26 +8,31 @@ window.onload = function(){
 		// Returnera den konverterade strängen.
 		// Vid fel, kasta ett undantag med ett meddelande till användaren. 
 		
-		if(isNaN(str)){
-			console.log("inte number");
-		}else {
-			console.log("number");
-		}
-		
 		var p = "";
 		var total = "";
 		
-		for (var i = 0; i < str.length; i++) {
-			
-			p += str[i].replace(/\a|\A/g,"#");
-			
-			if(str[i] == str[i].toUpperCase() ){
-				total += p[i].toLowerCase();
-			}else{
-				total += p[i].toUpperCase();
+		if(isNaN(str)){ // kollar om det inte är ett nr
+				//console.log("inte number");
+				for (var i = 0; i < str.length; i++) {
+				
+				p += str[i].replace(/a/gi,"#"); // byter ut a|A till #
+				
+				// byter ut stora bokstäver till små och tvärtom 
+				if(str[i] == str[i].toUpperCase()){ 
+					total += p[i].toLowerCase();
+				}else{
+					total += p[i].toUpperCase();
+				}
 			}
+			return total;
+		}else {
+			//console.log("number");
+			return "Detta är ett nummer och inte strängar";
 		}
-		return total;
+		
+		
+		
+		
 	};
 	// ------------------------------------------------------------------------------
 

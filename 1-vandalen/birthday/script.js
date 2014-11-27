@@ -2,7 +2,6 @@
 
 window.onload = function(){
 
-	
 	var birthday = function(date){
 		
 			//console.log(date);
