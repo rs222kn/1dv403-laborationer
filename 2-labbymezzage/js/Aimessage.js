@@ -11,20 +11,14 @@ function Aimessage(text){
     var createElemnts = {
         newMessege: document.createElement("div"), // div taggarna medelanderna kommer va i
         text: document.createElement("p"), // medelande texten
-        pdate: document.createElement("p"), // datum tiden
-        imgRemove: document.createElement("img"), // ta bort knapp/bilden
-        imgDate: document.createElement("img")
     };
     
     // text
     createElemnts.text.innerHTML = text;
     
     // class
-    createElemnts.text.setAttribute("class", "messageText");
-    createElemnts.pdate.setAttribute("class", "pdate");
+    createElemnts.text.setAttribute("class", "aimessageText");
     createElemnts.newMessege.setAttribute("class" ,"aimessage");
-    createElemnts.imgRemove.setAttribute("class", "imgBtn");
-    createElemnts.imgDate.setAttribute("class", "imgBtn");
     
     // render 
     doc.div.appendChild(createElemnts.newMessege);

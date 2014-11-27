@@ -21,10 +21,9 @@ var MessageBoard = {
         MessageBoard.doc.txt.onkeypress = function(e){
            if(e.keyCode == 13 && !e.shiftKey){
                 MessageBoard.creatMessage();
-                MessageBoard.doc.txt.value ="";
+                MessageBoard.doc.txt.value ='';
             }
         };
-        
     },
     // skapar medelandet (knapp tryck)
     creatMessage: function(){
@@ -39,6 +38,7 @@ var MessageBoard = {
             MessageBoard.renderMessage(i);
         }
     },
+    
     renderAiMessage: function(nr){
         
         setTimeout(function(){
@@ -68,8 +68,10 @@ var MessageBoard = {
         }, 1500);
         
     },
+    
     renderMessage: function(messageID){
         var nr = messageID+1; // bugg om man tar bort alla medelanden så står det fortfarande 1
+        if(MessageBoard.messages.length == 1){}
         MessageBoard.doc.antmess.innerHTML = "Antal medelanden: " + nr; // skriver ut antal medelanden.
         
         var createElemnts = {
@@ -84,9 +86,9 @@ var MessageBoard = {
         createElemnts.pdate.innerHTML = MessageBoard.messages[messageID].getDateText();
         
         // img
-        createElemnts.imgRemove.setAttribute("src", "img/delete.png"); // addar img bilden till imgRemove
+        createElemnts.imgRemove.setAttribute("src", "img/recycle.gif"); // addar img bilden till imgRemove
         createElemnts.imgRemove.setAttribute("alt", "red img button");
-        createElemnts.imgDate.setAttribute("src", "img/clock.png");
+        createElemnts.imgDate.setAttribute("src", "img/clippy.png");
         createElemnts.imgDate.setAttribute("alt", "img of a smal clock");
         
         // class
@@ -112,8 +114,7 @@ var MessageBoard = {
         });
         
         createElemnts.imgDate.addEventListener("click", function(){ // mouse-click på imgRemove
-            console.log("img clock tryck");
-           alert(MessageBoard.messages[messageID].getDate());
+            alert(MessageBoard.messages[messageID].getDate());
         });
         
         
