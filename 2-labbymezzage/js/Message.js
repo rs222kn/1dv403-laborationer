@@ -23,11 +23,10 @@ Message.prototype.toString = function(){
     return this.getText()+" (" + this.getDate() +")";
 };
 Message.prototype.getHTMLText = function(){
-    console.log("denna fungerar: getHTMLText");
-    return this.getText().replace(/ \n /g, "<br />");
+    return this.getText().replace(/[\n\r]/g, "<br />");
 };
 Message.prototype.getDateText = function(){
-    var timeStamp = new Date();
+    var timeStamp = this.getDate();
     return timeStamp.getHours() + ":" + timeStamp.getMinutes() + ":" + timeStamp.getSeconds();
 };
 
