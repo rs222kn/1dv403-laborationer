@@ -55,12 +55,26 @@ body{
     border: solid 4px #808080;
 }
 /* img buttins (clock/remove)*/
-.imgBtn{
-    height: 24px;
+
+.imgClock {
+    background-image: url(img/clippy.png);
+    background-size: 24px;
     width: 24px;
+    height: 24px;
     margin:0;
     padding: 0;
     float:right;
+    cursor: pointer;
+}
+.imgRemove{
+    background-image: url("img/recycle.gif");
+    background-size: 24px;
+    width: 24px;
+    height: 24px;
+    margin:0;
+    padding: 0;
+    float:right;
+    cursor: pointer;
 }
 
 #txt{
@@ -98,6 +112,7 @@ body{
 #controls{
     
 }
+
 
 
 

@@ -23,12 +23,14 @@ var MessageBoard = {
                 MessageBoard.creatMessage();
                 MessageBoard.doc.txt.value ='';
             }
+            
         };
     },
     // skapar medelandet (knapp tryck)
     creatMessage: function(){
         MessageBoard.messages.push(new Message(MessageBoard.doc.txt.value, new Date()));
         MessageBoard.renderMessage(MessageBoard.messages.length -1);
+        MessageBoard.doc.txt.value ='';
     },
     
     renderMessages: function(){
@@ -69,34 +71,29 @@ var MessageBoard = {
         
     },
     
+    messageCount: function(){
+        MessageBoard.doc.antmess.innerHTML = "Antal medelanden: " + MessageBoard.messages.length; // skriver ut antal medelanden.
+    },
     renderMessage: function(messageID){
-        var nr = messageID+1; // bugg om man tar bort alla medelanden så står det fortfarande 1
-        if(MessageBoard.messages.length == 1){}
-        MessageBoard.doc.antmess.innerHTML = "Antal medelanden: " + nr; // skriver ut antal medelanden.
+        MessageBoard.messageCount();
         
         var createElemnts = {
             newMessege: document.createElement("div"), // div taggarna medelanderna kommer va i
             text: document.createElement("p"), // medelande texten
             pdate: document.createElement("p"), // datum tiden
-            imgRemove: document.createElement("img"), // ta bort knapp/bilden
-            imgDate: document.createElement("img")
+            imgRemove: document.createElement("div"), // ta bort knapp/bilden
+            imgDate: document.createElement("div")
         };
         // text
         createElemnts.text.innerHTML = MessageBoard.messages[messageID].getHTMLText();
         createElemnts.pdate.innerHTML = MessageBoard.messages[messageID].getDateText();
         
-        // img
-        createElemnts.imgRemove.setAttribute("src", "img/recycle.gif"); // addar img bilden till imgRemove
-        createElemnts.imgRemove.setAttribute("alt", "red img button");
-        createElemnts.imgDate.setAttribute("src", "img/clippy.png");
-        createElemnts.imgDate.setAttribute("alt", "img of a smal clock");
-        
-        // class
+        // class / id
         createElemnts.text.setAttribute("class", "messageText");
         createElemnts.pdate.setAttribute("class", "pdate");
         createElemnts.newMessege.setAttribute("class" ,"message");
-        createElemnts.imgRemove.setAttribute("class", "imgBtn");
-        createElemnts.imgDate.setAttribute("class", "imgBtn");
+        createElemnts.imgRemove.setAttribute("class", "imgRemove"); // addar img bilden till imgRemove
+        createElemnts.imgDate.setAttribute("class", "imgClock");
         
         // render 
         MessageBoard.doc.div.appendChild(createElemnts.newMessege);
@@ -124,6 +121,7 @@ var MessageBoard = {
     removeMessage: function(messageID){
         MessageBoard.messages.splice(messageID, 1);
         MessageBoard.renderMessages();
+        MessageBoard.messageCount();
     }
 };
 
