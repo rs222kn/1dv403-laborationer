@@ -8,7 +8,6 @@ var MessageBoard = {
         antmess: document.getElementById("antMessage"),
         div: document.getElementById("messagearea"),
         count: 0
-    
     },
     
     messages: [],
@@ -20,10 +19,10 @@ var MessageBoard = {
         // enter i textarea 
         MessageBoard.doc.txt.onkeypress = function(e){
            if(e.keyCode == 13 && !e.shiftKey){
+               e.preventDefault();
                 MessageBoard.creatMessage();
                 MessageBoard.doc.txt.value ='';
             }
-            
         };
     },
     // skapar medelandet (knapp tryck)
@@ -41,7 +40,7 @@ var MessageBoard = {
         }
     },
     
-    renderAiMessage: function(nr){
+  renderAiMessage: function(nr){
         
         setTimeout(function(){
             switch (nr) {
@@ -81,8 +80,8 @@ var MessageBoard = {
             newMessege: document.createElement("div"), // div taggarna medelanderna kommer va i
             text: document.createElement("p"), // medelande texten
             pdate: document.createElement("p"), // datum tiden
-            imgRemove: document.createElement("div"), // ta bort knapp/bilden
-            imgDate: document.createElement("div")
+            imgRemove: document.createElement("a"), // ta bort knapp/bilden
+            imgDate: document.createElement("a")
         };
         // text
         createElemnts.text.innerHTML = MessageBoard.messages[messageID].getHTMLText();
