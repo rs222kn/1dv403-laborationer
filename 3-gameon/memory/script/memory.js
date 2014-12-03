@@ -3,19 +3,25 @@
 var Memory = {
     
     doc: {
-        grid:   document.getElementById("grid")
-        
+        grid:   document.getElementById("grid"),
+        pScore: document.getElementById("score"),
+        pTime: document.getElementById("time"),
+        pResult: document.getElementById("result")
     },
-    
-    ranImg: [], // alla random nr
+             // [5,5,3,3,4,4,2,2,7,7,6,6,1,1,8,8] Fusk! :P           
+    ranImg: [[5,5,3,3,4,4,2,2,7,7,6,6,1,1,8,8]], // alla random nr
     imgTagIndex: [], // lagrar hela create
-     
+    score: 0, 
+    startTime: undefined,
+    
+    gridRows: 4,
+    gridCells: 4,
     init: function(){
-        
-        Memory.ranImg.push(new RandomGenerator.getPictureArray(4, 4)); 
+        Memory.startTime = new Date();
+        //Memory.ranImg.push(new RandomGenerator.getPictureArray(Memory.gridRows, Memory.gridCells)); 
         
         console.log("SlupmArr: " + Memory.ranImg);
-        Memory.gameBord(4, 4, Memory.ranImg); //storleken på gridd
+        Memory.gameBord(Memory.gridRows, Memory.gridCells, Memory.ranImg); //storleken på gridd
         
     },
     gameBord: function(rowY, cellX, imgNr){
@@ -33,7 +39,7 @@ var Memory = {
                     img: document.createElement("img")
                 };
                 
-               // var cells = (i * cellX) + j; // antalet celler i gridd
+                //var cells = (i * cellX) + j; // antalet celler i gridd
                 
                 // attributer
                 create.a.setAttribute("href", "#");
@@ -77,6 +83,7 @@ var Memory = {
                 Memory.itChe1.imgNr = ranImg;
                 
                 Memory.timesPressed++;
+                
             }else if(Memory.timesPressed == 1){ // cell tryck 2
                 Memory.imgTagIndex[it].img.setAttribute("src", 'pics/'+ranImg+'.png'); // byter bild när man klickar på den specifik cell
                 
@@ -84,20 +91,31 @@ var Memory = {
                 Memory.itChe2.imgNr = ranImg;
                 
                 // kollar om dom båda har samma imgNr (altså dom har samma bild)
-                if(Memory.itChe1.imgNr === Memory.itChe2.imgNr){
-                    console.log("lika");
+                if(Memory.itChe1.imgNr === ranImg){
+                    Memory.score++;
+                    Memory.doc.pScore.innerHTML = "Score: "+ Memory.score;
+                    var total = Memory.gridRows + Memory.gridCells;
+                    
+                    // fixar allt med poäng.
+                    if(Memory.score === total){
+                        Memory.doc.pResult.innerHTML = "Grattis du klarade det!";
+                        var endDate = new Date();
+                        var totTime =  (endDate - Memory.startTime)/1000; 
+                        Memory.doc.pTime.innerHTML = "Det tog dig: " + totTime + "sekunder";
+                    }
+                    
                 }else{ // om inte kallar vi på timer som tar bort bilderna
-                    console.log("inte lika");
                     Memory.timers(0 , Memory.itChe1.id, Memory.itChe2.id);
                     
                 }
-            
+                
                 // nollställer allt (Memory.itChe'X' behövs inte nollställas egntligen..)
                 Memory.timesPressed = 0;
                 Memory.itChe1.id = null;
                 Memory.itChe1.imgNr = null;
                 Memory.itChe2.id = null;
                 Memory.itChe2.imgNr = null;
+                
             }
         }
     },
@@ -105,17 +123,23 @@ var Memory = {
     itChe1: {id: null, imgNr: null}, // objekt som lagrar värdena på det gammla cell'trycket en för vardera cell 
     itChe2: {id: null, imgNr: null},
     timesPressed: 0,
-    
+    bool: false, // ta bort
     timeoutID: null, // timeout id för timer om man skulle vilja avbryta den.
     
     timers: function(timerId, it1, it2){
+        
         var time = {
             changeBackPic: function(){
-                Memory.timeoutID = window.setTimeout(function(){
+                Memory.timeoutID = setTimeout(function(){
                     // byter till standard bild efter 1sec
                     Memory.imgTagIndex[it1].img.setAttribute("src", 'pics/0.png'); 
                     Memory.imgTagIndex[it2].img.setAttribute("src", 'pics/0.png');
                 }, 1000);
+            },
+            justWait: function(){
+                setTimeout(function() {
+                    Memory.bool = true;
+                }, 3000);
             }
         };
         
@@ -127,13 +151,9 @@ var Memory = {
                 clearTimeout(Memory.timeoutID);
                 break;
             case 2:
+                time.justWait();
                 break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
+            
         }
         
     }
