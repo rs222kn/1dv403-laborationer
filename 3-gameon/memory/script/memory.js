@@ -39,7 +39,7 @@ var Memory = {
                     img: document.createElement("img")
                 };
                 
-                //var cells = (i * cellX) + j; // antalet celler i gridd
+                //var cells = (i * cellX) + j; // antalet celler i gridd // kan användas för att räkna ut score
                 
                 // attributer
                 create.a.setAttribute("href", "#");
@@ -75,16 +75,16 @@ var Memory = {
         
         // Truck på en av alla cell'er
         function press(e, it, ranImg){
-            
-            if(Memory.timesPressed == 0){ // cell tryck 1
+            console.log(Memory.timesPressed);
+            if(Memory.timesPressed === 0){ // cell tryck 1
                 Memory.imgTagIndex[it].img.setAttribute("src", 'pics/'+ranImg+'.png'); // byter bild när man klickar på den specifik cell
                 
                 Memory.itChe1.id = it; // sparar nuvarande värden så dom kan användas senare
                 Memory.itChe1.imgNr = ranImg;
                 
-                Memory.timesPressed++;
+                Memory.timesPressed=1;
                 
-            }else if(Memory.timesPressed == 1){ // cell tryck 2
+            }else if(Memory.timesPressed === 1){ // cell tryck 2
                 Memory.imgTagIndex[it].img.setAttribute("src", 'pics/'+ranImg+'.png'); // byter bild när man klickar på den specifik cell
                 
                 Memory.itChe2.id = it; // sparar nuvarande värden så dom kan användas senare
@@ -102,28 +102,30 @@ var Memory = {
                         var endDate = new Date();
                         var totTime =  (endDate - Memory.startTime)/1000; 
                         Memory.doc.pTime.innerHTML = "Det tog dig: " + totTime + "sekunder";
+                        
                     }
-                    
-                }else{ // om inte kallar vi på timer som tar bort bilderna
+                }else{ // om inte kallar vi på timer som tar bort bilderna.
                     Memory.timers(0 , Memory.itChe1.id, Memory.itChe2.id);
-                    
                 }
-                
-                // nollställer allt (Memory.itChe'X' behövs inte nollställas egntligen..)
-                Memory.timesPressed = 0;
-                Memory.itChe1.id = null;
-                Memory.itChe1.imgNr = null;
-                Memory.itChe2.id = null;
-                Memory.itChe2.imgNr = null;
-                
-            }
+                Memory.timesPressed=2; // gör så man inte kan klicka felra gånger.
+                Memory.timers(2); // återställer klick functionen efter 1sec. 
+            }else{
+                console.log("else :(");
+             }
         }
     },
-    
+    // reset function som återställer alla värden.
+    reset:function(){
+        Memory.timesPressed = 0;
+        Memory.itChe1.id = null;
+        Memory.itChe1.imgNr = null;
+        Memory.itChe2.id = null;
+        Memory.itChe2.imgNr = null;
+        console.log(Memory.timesPressed);
+    },
     itChe1: {id: null, imgNr: null}, // objekt som lagrar värdena på det gammla cell'trycket en för vardera cell 
     itChe2: {id: null, imgNr: null},
     timesPressed: 0,
-    bool: false, // ta bort
     timeoutID: null, // timeout id för timer om man skulle vilja avbryta den.
     
     timers: function(timerId, it1, it2){
@@ -138,11 +140,10 @@ var Memory = {
             },
             justWait: function(){
                 setTimeout(function() {
-                    Memory.bool = true;
-                }, 3000);
+                    Memory.reset();
+                }, 1000);
             }
         };
-        
         switch(timerId){
             case 0:
                 time.changeBackPic();
@@ -153,11 +154,8 @@ var Memory = {
             case 2:
                 time.justWait();
                 break;
-            
         }
-        
     }
-    
 };
 
 window.onload = Memory.init;
