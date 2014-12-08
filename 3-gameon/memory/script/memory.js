@@ -11,7 +11,7 @@ var Memory = {
     
     vars: {
              // [5,5,3,3,4,4,2,2,7,7,6,6,1,1,8,8] Fusk! :P           
-        ranImg: [[5,5,3,3,4,4,2,2,7,7,6,6,1,1,8,8]], // alla random nr
+        ranImg: [], // alla random nr
         imgTagIndex: [], // lagrar hela create
         score: 0, 
         startTime: undefined,
@@ -21,9 +21,9 @@ var Memory = {
         
         itChe1: {id: null, imgNr: null, preJ: null}, // objekt som lagrar värdena på det gammla cell'trycket en för vardera cell 
         timesPressed: 0,
-        timeoutID: null, // timeout id för timer om man skulle vilja avbryta den.
+        timeoutID: null // timeout id för timer om man skulle vilja avbryta den.
         
-        gridSelector: []
+        
     },
     // återställer alla värden.. 
     reset:function(){
@@ -38,23 +38,20 @@ var Memory = {
         
         Memory.vars.timesPressed = 0;
         Memory.vars.timeoutID = null;
-        
-        //Memory.vars.gridSelector = [];
     },
     // inisierar alla variabler och obj o functioner
     init: function(){
         
         Memory.reset();
         Memory.vars.startTime = new Date();
-        //Memory.vars.ranImg.push(new RandomGenerator.getPictureArray(Memory.vars.gridRows, Memory.vars.gridCells)); 
-        console.log("SlupmArr: " + Memory.vars.ranImg);
+        Memory.vars.ranImg.push(new RandomGenerator.getPictureArray(Memory.vars.gridRows, Memory.vars.gridCells)); 
+        
         Memory.gameBord(Memory.vars.gridRows, Memory.vars.gridCells, Memory.vars.ranImg); //storleken på gridd
         
-        Memory.cellPress(Memory.vars.gridSelector.push(document.querySelectorAll(".gridCell")));
+        //Memory.cellPress(Memory.vars.gridSelector.push(document.querySelectorAll(".gridCell")));
         
         // den riktiga
-       //Memory.cellPress(document.querySelectorAll(".gridCell"));
-        //console.log(Memory.vars.gridSelector);
+        Memory.cellPress(document.querySelectorAll(".gridCell"));
     },
     // ritar upp game bord och skapar massa tagga
     gameBord: function(rowY, cellX){
@@ -71,7 +68,6 @@ var Memory = {
                     a: document.createElement("a"),
                     img: document.createElement("img")
                 };
-                
                 //var cells = (i * cellX) + j; // antalet celler i gridd // kan användas för att räkna ut score
                 
                 // attributer
@@ -88,33 +84,25 @@ var Memory = {
             } 
             Memory.doc.grid.appendChild(row); 
         }
-        //console.log(Memory.vars.imgTagIndex);
-        
-
     },
     // kärs om man trycker på en cell.
-    cellPress: function(/*gridSelector*/){
+    cellPress: function(gridSelector){
         
-        var funa = function(){
-            console.log("function i function");
-        };
-        
-        for (var i = 0; i < Memory.vars.gridSelector[0].length; i++) {
+        for (var i = 0; i < gridSelector.length; i++) {
             addListener(i);
         }
         
         function addListener(j) {
-            Memory.vars.gridSelector[0][j].addEventListener("click",function func(e){
+            gridSelector[j].addEventListener("click",function func(e){
                 press(e, j, Memory.vars.ranImg[0][j], func);
            });
         }
         function removeListener(id, func){
-            Memory.vars.gridSelector[0][id].removeEventListener("click", func);
+            gridSelector[id].removeEventListener("click", func);
         }
         
         // Truck på en av alla cell'er
         function press(e, it, ranImg, func){
-            console.log(Memory.vars.timesPressed);
             if(Memory.vars.timesPressed === 0){ // cell tryck 1
                 Memory.vars.imgTagIndex[it].img.setAttribute("src", 'pics/'+ranImg+'.png'); // byter bild när man klickar på den specifik cell
                 
@@ -143,54 +131,30 @@ var Memory = {
                         Memory.doc.pTime.innerHTML = "Det tog dig: " + totTime + "sekunder";
                     }
                 }else{ // om inte kallar vi på timer som tar bort bilderna.
-                    Memory.timers(0 , Memory.vars.itChe1.id, it);
+                    //Memory.timers(0 , Memory.vars.itChe1.id, it);
                     
                     setTimeout(function(){
+                        Memory.vars.imgTagIndex[it].img.setAttribute("src", 'pics/0.png'); 
+                        Memory.vars.imgTagIndex[Memory.vars.itChe1.id].img.setAttribute("src", 'pics/0.png');
+                    
                         addListener(it);
                         addListener(Memory.vars.itChe1.id);
                     }, 1000);
                 }
                 Memory.vars.timesPressed=2; // gör så man inte kan klicka felra gånger.
-                Memory.timers(2); // återställer klick functionen efter 1sec. 
-            }else{
-                console.log("else :(");
-             }
-        }
-        
-    },
-    
-    // tar han om alla olika timers o timer reset
-    timers: function(timerId, it1, it2){
-        console.log("testar");
-        var time = {
-            changeBackPic: function(){
-                Memory.vars.timeoutID = setTimeout(function(){
-                    // byter till standard bild efter 1sec
-                    Memory.vars.imgTagIndex[it1].img.setAttribute("src", 'pics/0.png'); 
-                    Memory.vars.imgTagIndex[it2].img.setAttribute("src", 'pics/0.png');
-                    
-                }, 1000);
-            },
-            justWait: function(){
+                // återställer klick functionen efter 1sec. 
                 setTimeout(function() {
                     Memory.vars.timesPressed = 0;
                     Memory.vars.itChe1.id = null;
                     Memory.vars.itChe1.imgNr = null;
                 }, 1000);
-            }
-        };
-        switch(timerId){
-            case 0:
-                time.changeBackPic();
-                break;
-            case 1:
-                clearTimeout(Memory.vars.timeoutID);
-                break;
-            case 2:
-                time.justWait();
-                break;
+            }else{
+                
+             }
         }
-    }
+    },
+    // tar han om alla olika timers o timer reset
 };
-
 window.onload = Memory.init;
+
+
