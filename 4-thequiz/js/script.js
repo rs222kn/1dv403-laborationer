@@ -9,6 +9,7 @@ var Bord = {
         getPTagResponse: document.getElementById("response"),
         
         varXhr: new XMLHttpRequest(),
+        varResponse: undefined
     },
     
     init: function(){
@@ -20,19 +21,22 @@ var Bord = {
     printQuestion: function(question){
         Bord.doc.getPTagQuestion.innerHTML = question;    
     },
-    
+    response: function(){
+        Bord.doc.varResponse = JSON.parse(Bord.doc.varXhr.responseText);
+    },
+
     // Får frågorna.. 
     xhrQuestion: function(url){
          url = url || "http://vhost3.lnu.se:20080/question/1";
         
         Bord.doc.varXhr.onreadystatechange = function(){
+            
             if (Bord.doc.varXhr.readyState === 4) {
                 if (Bord.doc.varXhr.status === 200) {
                     
-                    //Bord.doc.varResponse = JSON.parse(Bord.doc.varXhr.responseText);
-                    var response = JSON.parse(Bord.doc.varXhr.responseText);
-                    Bord.printQuestion(response.question);
-                    Bord.click(response);
+                    Bord.response();
+                    Bord.printQuestion(Bord.doc.varResponse.question);
+                    Bord.click(Bord.doc.varResponse);
                 }
                 else{
                     Bord.doc.getPTagResponse.innerHTML = "Oväntat fel!";
@@ -54,16 +58,17 @@ var Bord = {
         };
         
         Bord.doc.varXhr.onreadystatechange = function(){
+            
+            
             if (Bord.doc.varXhr.readyState === 4) {
                 if (Bord.doc.varXhr.status === 200) {
-                    var response = JSON.parse(Bord.doc.varXhr.responseText);
-                    
-                    Bord.xhrQuestion(response.nextURL);
-                    Bord.doc.getPTagResponse.innerHTML = response.message;
+                    Bord.response();
+                    Bord.xhrQuestion(Bord.doc.varResponse.nextURL);
+                    Bord.doc.getPTagResponse.innerHTML = Bord.doc.varResponse.message;
                 }
                 else{
-                    var response = JSON.parse(Bord.doc.varXhr.responseText);
-                    Bord.doc.getPTagResponse.innerHTML = response.message;
+                    Bord.response();
+                    Bord.doc.getPTagResponse.innerHTML = Bord.doc.varResponse.message;
                 }
             }
         };
@@ -86,7 +91,7 @@ var Bord = {
         function press(){
             //Bord.doc.varXhr.abort();
             Bord.xhrAnswer(response.nextURL, response.id, Bord.doc.getInputAnswer.value);
-        };
+        }
     },
 };
 
