@@ -1,17 +1,44 @@
-#grid{
-    width: 100px;
+body{
+    background-color: #591225;
 }
+h1, a, p{
+    font-family: 'Roboto', sans-serif;
+    color: #CC2F58;
+}
+#container{
+    width: 200px;
+    height: 300px;
+    margin:auto;
+    
+}
+header{
+    width: 200px;
+    height: 40px;
+    margin:auto;
+}
+
+#grid{
+    
+    
+}
+
 .gridRow{
     
 }
-
-.gridCell{
-    
-    border: solid 1px;
+a{
+    height:0;
+    width:0;
+    padding:0;
 }
 
-.hh{
-    background-color: #000000;
-    width: 300px;
-    border: solid 3px;
+.gridCell{
+    padding: 0px;
+    margin: 10px;
+    border: solid 4px;
+    border-color: #8C1C3A;
+}
+
+img{
+    height: 40px;
+    width: 40px;
 }

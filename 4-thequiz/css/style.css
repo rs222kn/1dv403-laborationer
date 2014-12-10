@@ -1,0 +1,38 @@
+body{
+    background-color: #685489;
+    
+}
+
+main{
+    
+}
+
+header{
+    font-family: 'Roboto', sans-serif;
+    padding-left: 4px;
+    background-color: #C6C6C3;
+    margin: auto;
+    
+}
+
+section{
+    box-shadow: 0 0 5px 2px rgba(0,0,0,.35);
+    padding: 12px;
+    width: 250px;
+    height: 200px;
+    background-color: #785E9C;
+    margin: auto;
+    
+}
+
+#question{
+    font-family: 'Roboto', sans-serif;
+}
+
+#answer{
+    font-family: 'Roboto', sans-serif;
+}
+
+#submit{
+   font-family: 'Roboto', sans-serif; 
+}

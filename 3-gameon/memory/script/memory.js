@@ -16,14 +16,12 @@ var Memory = {
         score: 0, 
         startTime: undefined,
         
-        gridRows: 4,
+        gridRows: 4, // storleken på le grid..
         gridCells: 4,
         
         itChe1: {id: null, imgNr: null, preJ: null}, // objekt som lagrar värdena på det gammla cell'trycket en för vardera cell 
         timesPressed: 0,
         timeoutID: null // timeout id för timer om man skulle vilja avbryta den.
-        
-        
     },
     // återställer alla värden.. 
     reset:function(){
@@ -156,5 +154,3 @@ var Memory = {
     // tar han om alla olika timers o timer reset
 };
 window.onload = Memory.init;
-
-
