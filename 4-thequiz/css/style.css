@@ -1,4 +1,5 @@
 body{
+    
     background: 
     linear-gradient(135deg, #FFEFD5 25%, transparent 25%) -50px 0,
     linear-gradient(225deg, #FFEFD5 25%, transparent 25%) -50px 0,
@@ -37,6 +38,8 @@ section{
     width: 250px;
     height: 200px;
     background-color: #DF4949;
+    
+    
 }
 
 #question{
@@ -57,6 +60,7 @@ section{
     border-bottom: 3px dotted black;
     border-bottom-color: #642121;
     margin-bottom: 8px;
+    text-align:center;
     
 }
 #answer:focus{
@@ -82,6 +86,12 @@ section{
 #submit:hover{
     background: #FFEFD5;
 }
+#submit:focus{
+    background: #FFEFD5;
+    outline: none;
+    /*border-color: #FFEFD5;
+    box-shadow: 0 0 10px #FFEFD5;*/
+}
 
 ::-webkit-input-placeholder {
    color: #642121;
@@ -103,4 +113,34 @@ section{
     text-align: center;
     font-family: 'Roboto', sans-serif; 
     color: #FFEFD5;
+}
+
+#result{
+    margin: auto;
+    box-shadow: 0 0 10px 4px rgba(0,0,0,.35);
+    padding: 12px;
+    width: 250px;
+    min-height: 150px;
+    background-color: #DF4949;    
+}
+
+table{
+    display: table;
+    margin: 0 auto;
+}
+tr{
+    font-family: 'Roboto', sans-serif; 
+    font-size:20px;
+    color: #FFEFD5;
+    text-align: center;
+}
+.a2{
+    font-family: 'Roboto', sans-serif; 
+    font-size:20px;
+    color: #642121;
+    text-align: center;
+}
+
+.hide{
+    display:none;
 }
