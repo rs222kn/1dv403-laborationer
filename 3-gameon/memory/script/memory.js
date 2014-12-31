@@ -139,16 +139,14 @@ var Memory = {
                         addListener(Memory.vars.itChe1.id);
                     }, 1000);
                 }
-                Memory.vars.timesPressed=2; // gör så man inte kan klicka felra gånger.
+                Memory.vars.timesPressed = 2; // gör så man inte kan klicka felra gånger.
                 // återställer klick functionen efter 1sec. 
                 setTimeout(function() {
                     Memory.vars.timesPressed = 0;
                     Memory.vars.itChe1.id = null;
                     Memory.vars.itChe1.imgNr = null;
                 }, 1000);
-            }else{
-                
-             }
+            }
         }
     },
     // tar han om alla olika timers o timer reset
