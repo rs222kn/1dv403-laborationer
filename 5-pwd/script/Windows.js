@@ -4,10 +4,7 @@ function Window(icon, desk, title){
     
     console.log("Window");
     //document.getElementsByClassName('window')[1].style.backgroundColor = '#84C174';
-    
-    
-    
-    
+
     var template = document.querySelector("#template");
     var windowTemplate = template.content.querySelector(".window");
     this.w = windowTemplate.cloneNode(true);
@@ -47,6 +44,34 @@ function Window(icon, desk, title){
         this.w.ondragstart = function() { return false }
         */
         
+        // new movement code... 
+        this.moveme = this.w.querySelector(".content");
+        
+        var selected = null, xPos = 0, yPos = 0, xElem = 0, yElem = 0;
+        
+        function dragInit(elem){
+            selected = elem;
+            xElem = xPos - selected.offsetLeft;
+            yElem = yPos - selected.offsetTop;
+        }
+        
+        function moveElem(e){
+            xPos = document.all ? window.event.clientX : e.pageX;
+            yPos = document.all ? window.event.clientY : e.pageY;
+            if(selected !== null){
+                selected.style.left = (xPos - xElem) + 'px';
+                selected.style.top = (yPos - yElem) + 'px';
+            }
+        }
+        function destroyMove(){
+            selected = null;
+        }
+        this.w.addEventListener("mousedown", function(){
+            dragInit(this);
+            return false;
+        });
+        document.onmousemove = moveElem;
+        document.onmouseup = destroyMove;
         
     // rezisa fönstret (flytta till prototype?)
     var startX, startY, startWidth, startHeight;
