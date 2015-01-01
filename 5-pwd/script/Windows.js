@@ -1,10 +1,10 @@
 "use strict";
-
+    
 function Window(icon, desk, title){
     
     console.log("Window");
     //document.getElementsByClassName('window')[1].style.backgroundColor = '#84C174';
-
+    
     var template = document.querySelector("#template");
     var windowTemplate = template.content.querySelector(".window");
     this.w = windowTemplate.cloneNode(true);
@@ -22,56 +22,83 @@ function Window(icon, desk, title){
     this.desktopBack = document.querySelector("#desktop"); // byta bakgrunds bild
     
     
-    var close = this.w.querySelector(".appClose");
+    //var close = this.w.querySelector(".appClose");
     var that = this;
-    close.addEventListener("click", function(){
+    this.w.querySelector(".appClose").addEventListener("click", function(){
         that.close();
     });
     
+   // VARFÖR FUNGERAR INTE DETTA?!
+    this.w.querySelector(".content").addEventListener("mousedown", getPosition, false);
+    function getPosition(event)
+	{
+	  var x = event.x;
+	  var y = event.y;
+
+	  //var canvas = that.w.querySelector(".content");
+
+	  x -= that.w.querySelector(".content").offsetLeft;
+	  y -= that.w.querySelector(".content").offsetTop;
+
+	  console.log("x:" + x + " y:" + y);
+	}
     
-      /*// flyt bara fönster  (fungerar men inte om man har resize på :/ (flytta till prototype?))
-        this.w.onmousedown = function(){
-            var self = this
+    
+   // flyt bara fönster (flytta till prototype?)
+    this.w.onmouseover = function(){
+        var self = this;
+        that.w.querySelector(".appTitle").onmousedown = function(){
+            
             document.onmousemove = function(e) {
-                e = e || event
-                self.style.left = e.pageX-25+'px'
-                self.style.top = e.pageY-25+'px'
-            }
-            this.onmouseup = function() {
-                document.onmousemove = null
-            }
+                e = e || event;
+                self.style.left = e.pageX-100 + 'px';
+                self.style.top = e.pageY-25 + 'px';
+                
+                //self.style.left = e.clientX + 'px';
+                //self.style.top = e.clientY + 'px';
+                
+                //console.log(e.pageX-100);
+                //console.log(e.pageY-25);
+                
+            };
+            self.addEventListener("mouseup", function(){
+                document.onmousemove = null;
+            });
         };
-        this.w.ondragstart = function() { return false }
-        */
-        
-        // new movement code... 
-        this.moveme = this.w.querySelector(".content");
-        
-        var selected = null, xPos = 0, yPos = 0, xElem = 0, yElem = 0;
-        
-        function dragInit(elem){
-            selected = elem;
-            xElem = xPos - selected.offsetLeft;
-            yElem = yPos - selected.offsetTop;
+    };
+    
+
+    
+    //this.w.ondragstart = function() { return false; };
+    /*// new movement code... 
+    this.moveme = this.w.querySelector(".content");
+    
+    var selected = null, xPos = 0, yPos = 0, xElem = 0, yElem = 0;
+    
+    function dragInit(elem){
+        selected = elem;
+        xElem = xPos - selected.offsetLeft;
+        yElem = yPos - selected.offsetTop;
+    }
+    
+    function moveElem(e){
+        xPos = document.all ? window.event.clientX : e.pageX;
+        yPos = document.all ? window.event.clientY : e.pageY;
+        if(selected !== null){
+            selected.style.left = (xPos - xElem) + 'px';
+            selected.style.top = (yPos - yElem) + 'px';
         }
-        
-        function moveElem(e){
-            xPos = document.all ? window.event.clientX : e.pageX;
-            yPos = document.all ? window.event.clientY : e.pageY;
-            if(selected !== null){
-                selected.style.left = (xPos - xElem) + 'px';
-                selected.style.top = (yPos - yElem) + 'px';
-            }
-        }
-        function destroyMove(){
-            selected = null;
-        }
-        this.w.addEventListener("mousedown", function(){
-            dragInit(this);
-            return false;
-        });
-        document.onmousemove = moveElem;
-        document.onmouseup = destroyMove;
+    }
+    function destroyMove(){
+        selected = null;
+    }
+    this.w.addEventListener("mousedown", function(){
+        dragInit(this);
+        return false;
+    });
+    document.onmousemove = moveElem;
+    document.onmouseup = destroyMove;
+    */
         
     // rezisa fönstret (flytta till prototype?)
     var startX, startY, startWidth, startHeight;
