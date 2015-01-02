@@ -59,18 +59,17 @@ html, body{
 
 /*själva fönstret p åappen*/
 .window:active{ 
-    z-index: 2;
+    
 }
 
 .window{
     position:absolute;
-    top: 10px;
-    left: 10px;
+    
     min-width: 300px;
     min-height: 260px;
     width: 300px;
     height: 260px;
-    z-index: 1;
+    z-index: 0;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -143,15 +142,7 @@ html, body{
         height: 100%;
     }
         
-        .imgWrap{
-            text-align:center;
-            padding:4px;
-            border: 2px solid;
-            margin: 2px;
-            float:left;
-            background-color: #C05125;
-            cursor: pointer;
-        }
+        
     
     /*omringar status..*/
     .appStatus{

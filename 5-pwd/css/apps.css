@@ -1,0 +1,14 @@
+
+/* ImgViewer */
+.imgWrap{
+    text-align:center;
+    padding:4px;
+    border: 2px solid;
+    margin: 2px;
+    float:left;
+    background-color: #C05125;
+    cursor: pointer;
+}
+
+/* Rss */
+

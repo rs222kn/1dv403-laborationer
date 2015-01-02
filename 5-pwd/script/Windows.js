@@ -1,6 +1,7 @@
 "use strict";
     
 function Window(icon, desk, title, url, h, w){
+    // stoelekn på fönsterna
     h = h || "260";
     w = w || "300";
     
@@ -18,12 +19,16 @@ function Window(icon, desk, title, url, h, w){
     
     desk.content.appendChild(this.w);
     
+    // sparar saker så det bli enklare att hämta dom senare
     this.content = this.w.querySelector(".content"); // där själva appen laddas
     this.control = this.w.querySelector(".appControl");
     this.appStatus = this.w.querySelector(".status"); // använder för att ta bort giff och laddnings text
     this.appload = this.w.querySelector(".loadingImg"); // placera laddnings gif här
     this.apploadText = this.w.querySelector(".loadingText"); // laddnings text
     this.desktopBack = document.querySelector("#desktop"); // byta bakgrunds bild
+    
+    // vart fönstret ska vara
+    this.windowPos(10, 10);
     
     // storlek på fönstret.
     this.w.style.height = h+'px';
@@ -57,6 +62,7 @@ function Window(icon, desk, title, url, h, w){
         var self = this;
         that.w.querySelector(".one").onmousedown = function(ev){
             var pos = that.getPosition(ev);// sjukt mycket dålig kod för att få en postition i ett fönster (den kortare versionen fungerar inte med this/that :'( )
+            
             document.onmousemove = function(e) {
                 e = e || event;
                 self.style.left = e.pageX-pos[0] + 'px';
@@ -65,15 +71,21 @@ function Window(icon, desk, title, url, h, w){
             };
             self.addEventListener("mouseup", function(){
                 document.onmousemove = null;
+                //that.windowPos(1);
             });
         };
     };
+    
+    
+    this.windowFocus(1);
+    this.w.addEventListener("mousedown", function() {
+        that.windowFocus(1);
+    });
     
     // rezisa fönstret (flytta till prototype?)
     var startX, startY, startWidth, startHeight;
     var resize = this.w.querySelector(".rezise");
     resize.addEventListener("mousedown", initMove, false);
-    
     function initMove(e){
         startX = e.clientX;
         startY = e.clientY;
@@ -82,7 +94,6 @@ function Window(icon, desk, title, url, h, w){
         document.documentElement.addEventListener('mousemove', doDrag, false);
         document.documentElement.addEventListener('mouseup', stopDrag, false); 
     }
-    
     // starta stopa drag
     function doDrag(e) {
         that.w.style.width = (startWidth + e.clientX - startX) + 'px';
@@ -92,8 +103,6 @@ function Window(icon, desk, title, url, h, w){
         document.documentElement.removeEventListener('mousemove', doDrag, false); 
         document.documentElement.removeEventListener('mouseup', stopDrag, false);
     }
-
-
 }
 
 // stänger ned fönstret
@@ -137,3 +146,33 @@ Window.prototype.getPosition = function(e) {
     pos[1] = Math.abs(pos[1]);
     return pos;
 };
+
+
+// bestämmer vilket fönster som ska vara högst uup!
+Window.prototype.windowFocus = function(z){
+    console.log("windowFocus prototype");
+    
+    z += Window.ZIndex;
+    this.w.style.zIndex = z;
+    Window.ZIndex = z;
+    
+};
+Window.ZIndex = 0;
+
+// flyttar fönstret lite varge gång man öppnar nytt
+Window.prototype.windowPos = function(top, left){
+    console.log("windowPos prototype");
+    
+    top += Window.windowTop;
+    left += Window.windowLeft;
+    
+    this.w.style.top = top+'px';
+    this.w.style.left = left+'px';
+    
+    Window.windowTop = top;
+    Window.windowLeft = left;
+    
+};
+
+Window.windowTop = 0;
+Window.windowLeft = 0;

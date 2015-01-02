@@ -12,7 +12,7 @@ function ImgViewer(obj){
                 loadImg(JSON.parse(xhr.responseText));
             }
         }
-    }
+    };
     
     obj.appload.setAttribute("src", "pic/ajaxloader.gif"); // laddar animation
     obj.apploadText.innerHTML = "Laddar"; // laddar text
@@ -71,7 +71,7 @@ function ImgViewer(obj){
         function setBackground(div, url, w, h){
             
             div.addEventListener("click", function(){
-                  console.log(obj.desktopBack);
+                  //console.log(obj.desktopBack);
                   
                    //var desktopt = new Desktop();
     

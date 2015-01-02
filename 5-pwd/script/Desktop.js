@@ -5,10 +5,10 @@ function Desktop(){
     this.content = document.querySelector("#desktop");
 }
 
+// laddar app iconer
 Desktop.prototype.loadApp = function (icon, app, name) {
-
+    console.log("loadApp prototype");
     
-    console.log("Desktop prototype");
     // skapar element
     var a = document.createElement("a");
     var img = document.createElement("img");
@@ -25,6 +25,7 @@ Desktop.prototype.loadApp = function (icon, app, name) {
     
     var that = this;
     
+    // öppnar app på klick
     a.addEventListener("click", function () {
         new app(new Window(icon, that, name)); // skickar information till app
     });
@@ -34,5 +35,6 @@ Desktop.prototype.loadApp = function (icon, app, name) {
 Desktop.prototype.loadImg = function(div, url, h, w, icon, app, name){
     console.log("loadImg Prototype");
     var that = this;
+    
     new app(new Window(icon, that, name, url, h, w)); // skickar information till app
 };
