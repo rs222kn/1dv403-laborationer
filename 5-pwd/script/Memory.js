@@ -1,55 +1,164 @@
 "use strict";
 
-function Memory(obj){
+function Memory(obj, desk){
+
+    var template = document.querySelector("#template");
+    var windowTemplate = template.content.querySelector(".memory");
+    this.m = windowTemplate.cloneNode(true);
     
-    var main = document.createElement("main");
-        var header = document.createElement("header");
-        var h1 = document.createElement("h1");
-        var section = document.createElement("section");
-            var pQuestion = document.createElement("p");
-            var inputText = document.createElement("input");
-            var inputBtn = document.createElement("input");
-            var pResponse = document.createElement("p");
+    obj.content.appendChild(this.m); // lägger ut memory på 
+    
+    var Bord = {
+    
+    // inehåller element och variabler:s
+    doc: {
+        getSubmitBtn: this.m.querySelector(".submit"),
+        getPTagQuestion: this.m.querySelector(".question"),
+        getInputAnswer: this.m.querySelector(".answer"),
+        getPTagResponse: this.m.querySelector(".response"),
+        getSection: this.m.querySelector(".mSection"),
+        getGrid: this.m.querySelector(".mTable"),
+        getDivResult: this.m.querySelector(".result"),
         
-        var div = document.createElement("div");
-            var table = document.createElement("table");
+        varXhr: new XMLHttpRequest(),
+        varResponse: undefined,
+        
+        varAttempts: [],
+        varTimes: 0,
+        varAntQuestions: 0
+    },
     
+    init: function(){
+        
+        Bord.xhrQuestion();
+    },
     
+    // skriver ut Frågor
+    printQuestion: function(question){
+        Bord.doc.getPTagQuestion.innerHTML = question;    
+    },
     
-    pQuestion.setAttribute("class", "question");
+    // Parsar JSON till obj
+    response: function(){
+        Bord.doc.varResponse = JSON.parse(Bord.doc.varXhr.responseText);
+    },
+
+    // hämtar frågorna samt vart man ska skicka svaret 
+    xhrQuestion: function(url){
+        url = url || "http://vhost3.lnu.se:20080/question/1";
+        
+        Bord.doc.varXhr.onreadystatechange = function(){
+            
+            if (Bord.doc.varXhr.readyState === 4) {
+                if (Bord.doc.varXhr.status === 200) {
+                    
+                    Bord.response();
+                    Bord.printQuestion(Bord.doc.varResponse.question);
+                    Bord.click(Bord.doc.varResponse);
+                    Bord.doc.varAntQuestions++; // ökar antalet frågor.
+                }
+                else{
+                    Bord.doc.getPTagResponse.innerHTML = "Oväntat fel!";
+                }
+            }
+        };
+        Bord.doc.varXhr.open("GET", url, true);
+        Bord.doc.varXhr.send(null);
+    },
     
-    inputText.setAttribute("type", "text");
-    inputText.setAttribute("name", "answer");
-    inputText.setAttribute("class", "answer");
-    inputText.setAttribute("placeholder", "Answer");
+    // skickar svaret och hämtar adressen till nästa fråga
+    xhrAnswer: function(url, reId, reAnswer){
+        
+        Bord.doc.getInputAnswer.value = "";
+        // skapar obj som ska JSON.parse:as/skickas som svar till server'n
+        var product = {
+            id: reId,
+            answer: reAnswer
+        };
+        
+        Bord.doc.varXhr.onreadystatechange = function(){
+            
+            if (Bord.doc.varXhr.readyState === 4) {
+                if (Bord.doc.varXhr.status === 200) {
+                    Bord.response();
+                    
+                    // om nextURL inte finns så är spelet slut
+                    if(Bord.doc.varResponse.nextURL === undefined){
+                        Bord.doc.varAttempts.push({question: Bord.doc.getPTagQuestion.innerHTML, attempt: Bord.doc.varTimes});
+                        Bord.doc.varTimes = 0;
+                        Bord.gameover();
+                    }else{
+                        
+                        Bord.doc.varAttempts.push({question: Bord.doc.getPTagQuestion.innerHTML, attempt: Bord.doc.varTimes});
+                        Bord.doc.varTimes = 0;
+                        Bord.xhrQuestion(Bord.doc.varResponse.nextURL);
+                        Bord.doc.getPTagResponse.innerHTML = Bord.doc.varResponse.message;
+                    }
+                    
+                }
+                else{// om man svarade fel.
+                    Bord.doc.varTimes++; // ökar antal försök man gjorde
+                    Bord.response();
+                    Bord.doc.getPTagResponse.innerHTML = Bord.doc.varResponse.message;
+                }
+            }
+        };
+        Bord.doc.varXhr.open("POST", url, true);
+        Bord.doc.varXhr.setRequestHeader('Content-Type', 'application/json');
+        Bord.doc.varXhr.send(JSON.stringify(product));
+    },
     
-    inputBtn.setAttribute("type", "submit");
-    inputBtn.setAttribute("value", "SEND");
-    inputBtn.setAttribute("name", "submit");
-    inputText.setAttribute("class", "submit");
+    // visar resultat när spelet är slut
+    gameover: function(){
+         
+         // skapar tabel med information om frågor och antal försök
+         for (var i = 0; i < Bord.doc.varAntQuestions; i++) { // lopar antalet frågor.
+            
+            var td = document.createElement("tr");
+            var a1 = document.createElement("a");
+            var a2 = document.createElement("a");
+            var br = document.createElement("br");
+            
+            a2.setAttribute("class","a2");
+            a1.innerHTML = "Fråga: " + Bord.doc.varAttempts[i].question;
+            a2.innerHTML = "Antal Försök: " + Bord.doc.varAttempts[i].attempt;
+            
+            td.appendChild(a1);
+            td.appendChild(br);
+            td.appendChild(a2);
+            
+            Bord.doc.getGrid.appendChild(td);
+         }
+         
+         Bord.doc.getSection.setAttribute("class", "hide");
+         Bord.doc.getDivResult.removeAttribute("class", "hide");
+         Bord.doc.getDivResult.setAttribute("class", "result");
+    },
     
-    pResponse.setAttribute("class", "response");
+    // hanterar all klick, tex enter och input submit
+    click: function(response){
+        Bord.doc.getSubmitBtn.addEventListener("click", press);
+        
+         // skicka med enter..
+        Bord.doc.getInputAnswer.onkeypress = function(e){
+            if(e.keyCode == 13 && !e.shiftKey){
+                e.preventDefault();
+                press();
+            }
+        };
+        
+        function press(){
+            //Bord.doc.varXhr.abort();
+            Bord.xhrAnswer(response.nextURL, response.id, Bord.doc.getInputAnswer.value);
+        }
+    }
+};
+
+    Bord.init();
     
-    div.setAttribute("class", "result");
-    div.setAttribute("class", "hide");
-    
-    section.appendChild(pQuestion);
-    section.appendChild(inputText);
-    section.appendChild(inputBtn);
-    section.appendChild(pResponse);
-    
-    div.appendChild(table);
-    
-    header.appendChild(h1);
-    
-    main.appendChild(header);
-    main.appendChild(section);
-    main.appendChild(div);
-    
-    obj.content.appendChild(main);
-    
-    pQuestion.innerHTML = "Question";
 }
+
+
 
 /*
 <main>

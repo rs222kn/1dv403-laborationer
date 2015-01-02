@@ -8,14 +8,15 @@ function ImgViewer(obj){
     xhr.onreadystatechange = function () {
         if(xhr.readyState === 4){
             if(xhr.status === 200){
-                obj.appStatus.innerHTML = "Klar";
+                obj.w.querySelector(".status").innerHTML = "Klar";
                 loadImg(JSON.parse(xhr.responseText));
             }
         }
     };
     
-    obj.appload.setAttribute("src", "pic/ajaxloader.gif"); // laddar animation
-    obj.apploadText.innerHTML = "Laddar"; // laddar text
+    
+    obj.w.querySelector(".loadingImg").setAttribute("src", "pic/ajaxloader.gif"); // laddar animation
+    obj.w.querySelector(".loadingText").innerHTML = "Laddar"; // laddar text
     
     xhr.open("GET", "http://homepage.lnu.se/staff/tstjo/labbyServer/imgviewer/", true);
     xhr.send(null);

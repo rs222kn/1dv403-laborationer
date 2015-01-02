@@ -6,7 +6,7 @@ function Desktop(){
 }
 
 // laddar app iconer
-Desktop.prototype.loadApp = function (icon, app, name) {
+Desktop.prototype.loadApp = function (icon, app, name, h, w) {
     console.log("loadApp prototype");
     
     // skapar element
@@ -27,7 +27,7 @@ Desktop.prototype.loadApp = function (icon, app, name) {
     
     // öppnar app på klick
     a.addEventListener("click", function () {
-        new app(new Window(icon, that, name)); // skickar information till app
+        new app(new Window(icon, that, name, null, h, w)); // skickar information till app
     });
 };
 

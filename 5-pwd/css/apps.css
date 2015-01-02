@@ -10,5 +10,146 @@
     cursor: pointer;
 }
 
-/* Rss */
+/* memory */
+.memory{
+    background: 
+    linear-gradient(135deg, #FFEFD5 25%, transparent 25%) -50px 0,
+    linear-gradient(225deg, #FFEFD5 25%, transparent 25%) -50px 0,
+    linear-gradient(315deg, #FFEFD5 25%, transparent 25%),
+    linear-gradient(45deg, #FFEFD5 25%, transparent 25%);	
+    background-size: 100px 100px;
+    height: 100%;
+    padding-top: 20px;
+    background-color: #DF4949;
+}
 
+.mHeader{
+    
+    width: 250px;
+    height: 50px;
+    background-color: #642121;
+    padding-top: 10px;
+    margin: auto;
+    
+}
+.mH1{
+    font-family: 'Roboto', sans-serif;
+    margin: auto;
+    color: #DF4949;
+    text-align: center;
+    font-size:30px;
+}
+
+.mSection{
+    margin: auto;
+    box-shadow: 0 0 10px 4px rgba(0,0,0,.35);
+    padding: 12px;
+    width: 250px;
+    height: 200px;
+    background-color: #DF4949;
+    
+    
+}
+
+.question{
+    font-family: 'Roboto', sans-serif;
+    font-size:20px;
+    color: #FFEFD5;
+    text-align: center;
+}
+
+.answer{
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    width:250px;
+    display: block;
+    border: none;
+    color: #FFEFD5;
+    background: transparent;
+    border-bottom: 3px dotted black;
+    border-bottom-color: #642121;
+    margin-bottom: 8px;
+    text-align:center;
+    
+}
+.answer:focus{
+    outline: none;
+    border-color: #FFEFD5;
+}
+
+.submit{
+    
+    display: table;
+    margin: 0 auto;
+    
+    border: 0px;
+    
+    height:40px;
+    width:200px;
+    font-family: 'Roboto', sans-serif; 
+    font-size:20px;
+    
+    color: #DF4949;
+    background: #642121;
+}
+.submit:hover{
+    background: #FFEFD5;
+}
+.submit:focus{
+    background: #FFEFD5;
+    outline: none;
+    /*border-color: #FFEFD5;
+    box-shadow: 0 0 10px #FFEFD5;*/
+}
+
+::-webkit-input-placeholder {
+   color: #642121;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #FFEFD5;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #FFEFD5;  
+}
+
+:-ms-input-placeholder {  
+   color: #FFEFD5;  
+}
+
+.response{
+    text-align: center;
+    font-family: 'Roboto', sans-serif; 
+    color: #FFEFD5;
+}
+
+.result{
+    margin: auto;
+    box-shadow: 0 0 10px 4px rgba(0,0,0,.35);
+    padding: 12px;
+    width: 250px;
+    min-height: 150px;
+    background-color: #DF4949;    
+}
+
+.mTable{
+    display: table;
+    margin: 0 auto;
+}
+tr{
+    font-family: 'Roboto', sans-serif; 
+    font-size:20px;
+    color: #FFEFD5;
+    text-align: center;
+}
+.a2{
+    font-family: 'Roboto', sans-serif; 
+    font-size:20px;
+    color: #642121;
+    text-align: center;
+}
+
+.hide{
+    display:none;
+}

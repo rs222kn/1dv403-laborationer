@@ -2,8 +2,8 @@
     
 function Window(icon, desk, title, url, h, w){
     // stoelekn på fönsterna
-    h = h || "260";
-    w = w || "300";
+    h = h || "300";
+    w = w || "260";
     
     this.url = url;
     
@@ -18,24 +18,17 @@ function Window(icon, desk, title, url, h, w){
     this.w.querySelector(".appIcon").src = icon; // läggaer dit bilden
     
     desk.content.appendChild(this.w);
-    
-    // sparar saker så det bli enklare att hämta dom senare
     this.content = this.w.querySelector(".content"); // där själva appen laddas
-    this.control = this.w.querySelector(".appControl");
-    this.appStatus = this.w.querySelector(".status"); // använder för att ta bort giff och laddnings text
-    this.appload = this.w.querySelector(".loadingImg"); // placera laddnings gif här
-    this.apploadText = this.w.querySelector(".loadingText"); // laddnings text
-    this.desktopBack = document.querySelector("#desktop"); // byta bakgrunds bild
-    
+
     // vart fönstret ska vara
-    this.windowPos(10, 10);
+    this.windowPos(12, 5);
     
     // storlek på fönstret.
     this.w.style.height = h+'px';
     this.w.style.width = w+'px';
     
-    //var close = this.w.querySelector(".appClose");
     var that = this;
+    
     this.w.querySelector(".appClose").addEventListener("click", function(){
         that.close();
     });
@@ -147,7 +140,6 @@ Window.prototype.getPosition = function(e) {
     return pos;
 };
 
-
 // bestämmer vilket fönster som ska vara högst uup!
 Window.prototype.windowFocus = function(z){
     console.log("windowFocus prototype");
@@ -173,6 +165,5 @@ Window.prototype.windowPos = function(top, left){
     Window.windowLeft = left;
     
 };
-
 Window.windowTop = 0;
 Window.windowLeft = 0;
