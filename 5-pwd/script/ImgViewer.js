@@ -69,9 +69,16 @@ function ImgViewer(obj){
         
         // sätter bakgrunden på skrivbordet
         function setBackground(div, url, w, h){
+            
             div.addEventListener("click", function(){
                   console.log(obj.desktopBack);
-                  obj.desktopBack.style.backgroundImage = 'url('+url+')';
+                  
+                   //var desktopt = new Desktop();
+    
+                    /* laddar apparna */
+                    new Desktop().loadImg(div, url, h, w, "pic/icon1.png", ViewImg, "Foto"); 
+                  
+                  //obj.desktopBack.style.backgroundImage = 'url('+url+')';
             });
         }
     }

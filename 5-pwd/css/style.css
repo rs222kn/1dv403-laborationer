@@ -58,6 +58,10 @@ html, body{
 /*==template=style=====================*/
 
 /*själva fönstret p åappen*/
+.window:active{ 
+    z-index: 2;
+}
+
 .window{
     position:absolute;
     top: 10px;
@@ -66,7 +70,7 @@ html, body{
     min-height: 260px;
     width: 300px;
     height: 260px;
-    
+    z-index: 1;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -184,5 +188,5 @@ html, body{
             bottom: 0; 
             cursor: se-resize;
         }
-
-
+        
+        

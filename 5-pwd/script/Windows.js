@@ -1,6 +1,10 @@
 "use strict";
     
-function Window(icon, desk, title){
+function Window(icon, desk, title, url, h, w){
+    h = h || "260";
+    w = w || "300";
+    
+    this.url = url;
     
     console.log("Window");
     //document.getElementsByClassName('window')[1].style.backgroundColor = '#84C174';
@@ -21,6 +25,9 @@ function Window(icon, desk, title){
     this.apploadText = this.w.querySelector(".loadingText"); // laddnings text
     this.desktopBack = document.querySelector("#desktop"); // byta bakgrunds bild
     
+    // storlek på fönstret.
+    this.w.style.height = h+'px';
+    this.w.style.width = w+'px';
     
     //var close = this.w.querySelector(".appClose");
     var that = this;
@@ -55,7 +62,6 @@ function Window(icon, desk, title){
                 self.style.left = e.pageX-pos[0] + 'px';
                 pos[1] = 10; // sätt till 10 då det blev knas med den automatiska räknaren :S 
                 self.style.top = e.pageY-pos[1] + 'px';
-                console.log(pos[1]);
             };
             self.addEventListener("mouseup", function(){
                 document.onmousemove = null;
@@ -77,11 +83,11 @@ function Window(icon, desk, title){
         document.documentElement.addEventListener('mouseup', stopDrag, false); 
     }
     
+    // starta stopa drag
     function doDrag(e) {
         that.w.style.width = (startWidth + e.clientX - startX) + 'px';
         that.w.style.height = (startHeight + e.clientY - startY) + 'px';
     }
-
     function stopDrag(e) {
         document.documentElement.removeEventListener('mousemove', doDrag, false); 
         document.documentElement.removeEventListener('mouseup', stopDrag, false);

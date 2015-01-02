@@ -30,3 +30,9 @@ Desktop.prototype.loadApp = function (icon, app, name) {
     });
 };
 
+// visar bilder i ett separat fönster
+Desktop.prototype.loadImg = function(div, url, h, w, icon, app, name){
+    console.log("loadImg Prototype");
+    var that = this;
+    new app(new Window(icon, that, name, url, h, w)); // skickar information till app
+};
