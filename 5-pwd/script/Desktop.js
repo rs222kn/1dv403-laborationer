@@ -1,13 +1,11 @@
 "use strict";
 
 function Desktop(){
-    console.log("Desktop");
     this.content = document.querySelector("#desktop");
 }
 
 // laddar app iconer
 Desktop.prototype.loadApp = function (icon, app, name, h, w) {
-    console.log("loadApp prototype");
     
     // skapar element
     var a = document.createElement("a");
@@ -33,7 +31,6 @@ Desktop.prototype.loadApp = function (icon, app, name, h, w) {
 
 // visar bilder i ett separat fönster
 Desktop.prototype.loadImg = function(div, url, h, w, icon, app, name){
-    console.log("loadImg Prototype");
     var that = this;
     
     new app(new Window(icon, that, name, url, h, w)); // skickar information till app

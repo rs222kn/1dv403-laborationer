@@ -7,7 +7,6 @@ function Window(icon, desk, title, url, h, w){
     
     this.url = url;
     
-    console.log("Window");
     //document.getElementsByClassName('window')[1].style.backgroundColor = '#84C174';
     
     var template = document.querySelector("#template");
@@ -20,8 +19,9 @@ function Window(icon, desk, title, url, h, w){
     desk.content.appendChild(this.w);
     this.content = this.w.querySelector(".content"); // där själva appen laddas
 
+
     // vart fönstret ska vara
-    this.windowPos(12, 5);
+    this.windowPos(10, 10, (window.innerHeight - 60), (window.innerWidth - w));
     
     // storlek på fönstret.
     this.w.style.height = h+'px';
@@ -68,7 +68,6 @@ function Window(icon, desk, title, url, h, w){
             });
         };
     };
-    
     
     this.windowFocus(1);
     this.w.addEventListener("mousedown", function() {
@@ -142,7 +141,6 @@ Window.prototype.getPosition = function(e) {
 
 // bestämmer vilket fönster som ska vara högst uup!
 Window.prototype.windowFocus = function(z){
-    console.log("windowFocus prototype");
     
     z += Window.ZIndex;
     this.w.style.zIndex = z;
@@ -152,9 +150,17 @@ Window.prototype.windowFocus = function(z){
 Window.ZIndex = 0;
 
 // flyttar fönstret lite varge gång man öppnar nytt
-Window.prototype.windowPos = function(top, left){
-    console.log("windowPos prototype");
+Window.prototype.windowPos = function(top, left, height, width){
+    if((Window.windowTop+top) > height){
+        Window.windowTop = 0;
+        Window.windowLeft*2 ;
+        
+    }
     
+    if((Window.windowLeft+left) > width-70){
+        Window.windowLeft = Window.windowLeft/2;
+        Window.windowTop = 0;
+    }
     top += Window.windowTop;
     left += Window.windowLeft;
     

@@ -8,6 +8,7 @@ function Memory(obj, desk){
     
     obj.content.appendChild(this.m); // lägger ut memory på 
     
+    // memory spelet
     var Bord = {
     
     // inehåller element och variabler:s
