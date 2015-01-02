@@ -15,7 +15,7 @@ function Window(icon, desk, title){
     desk.content.appendChild(this.w);
     
     this.content = this.w.querySelector(".content"); // där själva appen laddas
-    
+    this.control = this.w.querySelector(".appControl");
     this.appStatus = this.w.querySelector(".status"); // använder för att ta bort giff och laddnings text
     this.appload = this.w.querySelector(".loadingImg"); // placera laddnings gif här
     this.apploadText = this.w.querySelector(".loadingText"); // laddnings text
@@ -27,39 +27,35 @@ function Window(icon, desk, title){
     this.w.querySelector(".appClose").addEventListener("click", function(){
         that.close();
     });
-    
-   // VARFÖR FUNGERAR INTE DETTA?!
-    this.w.querySelector(".content").addEventListener("mousedown", getPosition, false);
-    function getPosition(event)
+
+    // VARFÖR FUNGERAR INTE DETTA?!
+    /*function getPosition(event)
 	{
-	  var x = event.x;
-	  var y = event.y;
+        var x = event.x;
+        var y = event.y;
+        
+        x -= that.w.querySelector(".content").offsetLeft;
+        y -= that.w.querySelector(".content").offsetTop;
+        
+        var aX = event.pageX - that.content.offsetLeft; 
+        var aY = event.pageY - that.content.offsetTop;
+        
+        console.log("nr 1 : x:" + x + " y:" + y);
+        console.log("nr 2 : x:" + aX + " y:" + aY);
+        console.log("====================");
+	}*/
 
-	  //var canvas = that.w.querySelector(".content");
-
-	  x -= that.w.querySelector(".content").offsetLeft;
-	  y -= that.w.querySelector(".content").offsetTop;
-
-	  console.log("x:" + x + " y:" + y);
-	}
-    
-    
    // flyt bara fönster (flytta till prototype?)
     this.w.onmouseover = function(){
         var self = this;
-        that.w.querySelector(".appTitle").onmousedown = function(){
-            
+        that.w.querySelector(".one").onmousedown = function(ev){
+            var pos = that.getPosition(ev);// sjukt mycket dålig kod för att få en postition i ett fönster (den kortare versionen fungerar inte med this/that :'( )
             document.onmousemove = function(e) {
                 e = e || event;
-                self.style.left = e.pageX-100 + 'px';
-                self.style.top = e.pageY-25 + 'px';
-                
-                //self.style.left = e.clientX + 'px';
-                //self.style.top = e.clientY + 'px';
-                
-                //console.log(e.pageX-100);
-                //console.log(e.pageY-25);
-                
+                self.style.left = e.pageX-pos[0] + 'px';
+                pos[1] = 10; // sätt till 10 då det blev knas med den automatiska räknaren :S 
+                self.style.top = e.pageY-pos[1] + 'px';
+                console.log(pos[1]);
             };
             self.addEventListener("mouseup", function(){
                 document.onmousemove = null;
@@ -67,45 +63,12 @@ function Window(icon, desk, title){
         };
     };
     
-
-    
-    //this.w.ondragstart = function() { return false; };
-    /*// new movement code... 
-    this.moveme = this.w.querySelector(".content");
-    
-    var selected = null, xPos = 0, yPos = 0, xElem = 0, yElem = 0;
-    
-    function dragInit(elem){
-        selected = elem;
-        xElem = xPos - selected.offsetLeft;
-        yElem = yPos - selected.offsetTop;
-    }
-    
-    function moveElem(e){
-        xPos = document.all ? window.event.clientX : e.pageX;
-        yPos = document.all ? window.event.clientY : e.pageY;
-        if(selected !== null){
-            selected.style.left = (xPos - xElem) + 'px';
-            selected.style.top = (yPos - yElem) + 'px';
-        }
-    }
-    function destroyMove(){
-        selected = null;
-    }
-    this.w.addEventListener("mousedown", function(){
-        dragInit(this);
-        return false;
-    });
-    document.onmousemove = moveElem;
-    document.onmouseup = destroyMove;
-    */
-        
     // rezisa fönstret (flytta till prototype?)
     var startX, startY, startWidth, startHeight;
     var resize = this.w.querySelector(".rezise");
-    resize.addEventListener("mousedown", init, false);
+    resize.addEventListener("mousedown", initMove, false);
     
-    function init(e){
+    function initMove(e){
         startX = e.clientX;
         startY = e.clientY;
         startWidth = parseInt(document.defaultView.getComputedStyle(that.w).width, 10);
@@ -124,13 +87,47 @@ function Window(icon, desk, title){
         document.documentElement.removeEventListener('mouseup', stopDrag, false);
     }
 
-    //var doc = document.getElementsByClassName('window');
-    //doc[1].style.marginLeft = "20px";
-    //doc[1].style.marginTop = "20px";
-    
-    
+
 }
 
+// stänger ned fönstret
 Window.prototype.close = function(){
     this.w.parentNode.removeChild(this.w);  
+}; 
+
+// hämtar position inne i en div
+Window.prototype.FindPosition = function(oElement){
+    
+    if(typeof( oElement.offsetParent ) != "undefined")
+      {
+        for(var posX = 0, posY = 0; oElement; oElement = oElement.offsetParent)
+        {
+          posX += oElement.offsetLeft;
+          posY += oElement.offsetTop;
+        }
+          return [ posX, posY ];
+        }
+        else
+        {
+          return [ oElement.x, oElement.y ];
+    }
+}; 
+Window.prototype.getPosition = function(e) {
+    var PosX = 0;
+    var PosY = 0;
+    var statusPos;
+    statusPos = new this.FindPosition(this.content);
+    
+    if (e.pageX || e.pageY){
+        PosX = e.pageX;
+        PosY = e.pageY;
+    }else if (e.clientX || e.clientY){
+        PosX = e.clientX + document.body.scrollLeft+ document.documentElement.scrollLeft;
+        PosY = e.clientY + document.body.scrollTop+ document.documentElement.scrollTop;
+    }
+    var pos = [];
+    pos[0] = PosX - statusPos[0];
+    pos[1] = PosY - statusPos[1];
+    pos[1] = Math.abs(pos[1]);
+    return pos;
 };
