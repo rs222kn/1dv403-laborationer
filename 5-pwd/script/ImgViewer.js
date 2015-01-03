@@ -1,7 +1,11 @@
 "use strict";
 
 function ImgViewer(obj){
-    
+    this.getImg(obj);
+}
+
+// laddar hämtar url's från server
+ImgViewer.prototype.getImg = function(obj) {
     var that = this;
     var xhr =  new XMLHttpRequest();
     xhr.onreadystatechange = function () {
@@ -19,7 +23,7 @@ function ImgViewer(obj){
     
     xhr.open("GET", "http://homepage.lnu.se/staff/tstjo/labbyServer/imgviewer/", true);
     xhr.send(null);
-}
+};
 
 // laddar bilderna från en server och man kan sätta dom som bakgrunds bild om man vill
 ImgViewer.prototype.presentImg = function (picArray, obj) {

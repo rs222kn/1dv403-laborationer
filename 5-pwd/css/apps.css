@@ -19,7 +19,6 @@
     linear-gradient(45deg, #FFEFD5 25%, transparent 25%);	
     background-size: 100px 100px;
     height: 100%;
-    padding-top: 20px;
     background-color: #DF4949;
 }
 
@@ -152,4 +151,33 @@ tr{
 
 .hide{
     display:none;
+}
+
+/* rss */
+
+.rssFeed{
+    padding:4px;
+    background-color: #F2F1EE;
+}
+.rssFeed a{
+    font-size: 16px;
+    margin-left:10px;
+    margin-right: 10px;
+}
+.rssFeed{
+
+}
+.rssFeed p{
+    margin-left:10px;
+    margin-right: 10px;
+}
+.rssFeed img{
+    width: 100%;
+    height: 100%;
+}
+
+.rss_title{
+    text-align:center;
+    font-size:18px;
+    background-color: #A0A09D;
 }

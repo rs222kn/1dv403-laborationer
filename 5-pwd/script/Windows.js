@@ -21,7 +21,7 @@ function Window(icon, desk, title, url, h, w){
 
 
     // vart fönstret ska vara
-    this.windowPos(10, 10, (window.innerHeight - 60), (window.innerWidth - w));
+    this.windowPos(20, 10, (window.innerHeight - 60), (window.innerWidth - w));
     
     // storlek på fönstret.
     this.w.style.height = h+'px';
