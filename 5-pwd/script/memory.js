@@ -4,7 +4,7 @@ function Memory(obj) {
     var template = document.querySelector("#template");
     // ie comp
     var windowTemplate;
-    var tmp = document.documentMode, e, isIE;
+    var tmp = document.documentMode;
     if(tmp){
          windowTemplate = template.querySelector(".memory");
     }else{

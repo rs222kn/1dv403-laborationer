@@ -13,7 +13,7 @@ function Window(icon, desk, title, url, h, w){
     var template = document.querySelector("#template");
     var windowTemplate;
     
-    var tmp = document.documentMode, e, isIE;
+    var tmp = document.documentMode;
     if(tmp){
          windowTemplate = template.querySelector(".window");
     }else{

@@ -6,7 +6,7 @@ function Quiz(obj, desk){
     var windowTemplate;
     
     // ie comp
-    var tmp = document.documentMode, e, isIE;
+    var tmp = document.documentMode;
     if(tmp){
          windowTemplate = template.querySelector(".quiz");
     }else{
