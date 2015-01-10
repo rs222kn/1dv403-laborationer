@@ -10,7 +10,7 @@
     <body>
         
         <div id="desktop">
-            
+            <div class="hide">
             <template id="template">
                 <div class="window">
                     
@@ -21,27 +21,49 @@
                         </div>
                         <div class="appClose"></div>
                     </div>
-                    
                     <div class="content"></div>
-                    <div class="appStatus"><div class="status"><img class="loadingImg"></img><p class="loadingText"></p></div><div class="rezise"></div></div>
+                    
+                    <div class="appStatus">
+                        <div class="status">
+                            <img class="loadingImg"></img>
+                            <p class="loadingText"></p>
+                        </div>
+                        <div class="rezise"></div>
+                    </div>
+                    
                 </div>
                 
-                <div class="memory">
-                    <header class="mHeader"><h1 class="mH1">THE QUIZ</h1></header>
-                    <section class="mSection">
+                <div class="quiz">
+                    <header class="qHeader"><h1 class="qH1">THE QUIZ</h1></header>
+                    <section class="qSection">
                         <p class="question">Question</p>
                         <input type="text" name="answer" class="answer" placeholder="Answer" />
                         <input type="submit" value="SEND" name="submit" class="submit" />
                         <p class="response"></p>
                     </section>
                     <div class="result hide">
-                        <table class="mTable">
+                        <table class="qTable">
                         
                         </table>
                     </div>
                 </div>
+                
+                <div class="memory">
+                    <div class="mMain">
+                    <header class="mHeader">
+                        <h1 class="mH1">GAME ON!</h1>
+                    </header>
+                    
+                        <table class="mGrid">
+                        </table>
+                        
+                        <p class="mScore">Score: </p>
+                        <p class="mTime"></p>
+                        <p class="mResult"></p>
+                    </div>
+                </div>
             </template>
-            
+            </div>
             <div id="menu">
             
             </div>
@@ -51,7 +73,9 @@
         <script src="script/Windows.js"></script>
         <script src="script/ImgViewer.js"></script>
         <script src="script/ViewImg.js"></script>
-        <script src="script/Memory.js"></script>
+        <script src="script/Quiz.js"></script>
+        <script src="script/random.js"></script>
+        <script src="script/memory.js"></script>
         <script src="script/Rss.js"></script>
         <script src="script/Start.js"></script>
         

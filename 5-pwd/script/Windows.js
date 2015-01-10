@@ -1,27 +1,46 @@
 "use strict";
     
 function Window(icon, desk, title, url, h, w){
-    // stoelekn på fönsterna
+    // standard stoelekn på fönsterna
     h = h || "300";
     w = w || "260";
     
     this.url = url;
+    this.icon = icon;
+    this.desktop = desk;
     
     //document.getElementsByClassName('window')[1].style.backgroundColor = '#84C174';
-    
     var template = document.querySelector("#template");
-    var windowTemplate = template.content.querySelector(".window");
+    var windowTemplate;
+    
+    var tmp = document.documentMode, e, isIE;
+    if(tmp){
+         windowTemplate = template.querySelector(".window");
+    }else{
+         windowTemplate = template.content.querySelector(".window");
+    }
+    
+    
+    
+    //console.log(template);
+    
+    
+    
+    
     this.w = windowTemplate.cloneNode(true);
     
     this.w.querySelector(".appTitle").innerHTML = title; // lägger dit titlen
     this.w.querySelector(".appIcon").src = icon; // läggaer dit bilden
     
-    desk.content.appendChild(this.w);
+    // sparar för snab och enkel åtkomst
     this.content = this.w.querySelector(".content"); // där själva appen laddas
-
-
-    // vart fönstret ska vara
-    this.windowPos(20, 10, (window.innerHeight - 60), (window.innerWidth - w));
+    this.loadText = this.w.querySelector(".loadingText");
+    this.loadImg = this.w.querySelector(".loadingImg");
+    
+    desk.content.appendChild(this.w); // lägger ut ett "Window" på html sidan
+    
+    // placering av fönsteret
+    this.windowPos(20, 10, (window.innerHeight - 70), (window.innerWidth - w));
     
     // storlek på fönstret.
     this.w.style.height = h+'px';
@@ -151,6 +170,7 @@ Window.ZIndex = 0;
 
 // flyttar fönstret lite varge gång man öppnar nytt
 Window.prototype.windowPos = function(top, left, height, width){
+    
     if((Window.windowTop+top) > height){
         Window.windowTop = 0;
         Window.windowLeft*2 ;

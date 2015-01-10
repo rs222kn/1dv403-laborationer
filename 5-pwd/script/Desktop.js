@@ -28,10 +28,3 @@ Desktop.prototype.loadApp = function (icon, app, name, h, w) {
         new app(new Window(icon, that, name, null, h, w)); // skickar information till app
     });
 };
-
-// visar bilder i ett separat fönster
-Desktop.prototype.loadImg = function(div, url, h, w, icon, app, name){
-    var that = this;
-    
-    new app(new Window(icon, that, name, url, h, w)); // skickar information till app
-};

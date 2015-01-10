@@ -1,17 +1,17 @@
 
-/* ImgViewer */
+/*==================ImgViewer===============*/
 .imgWrap{
     text-align:center;
     padding:4px;
     border: 2px solid;
     margin: 2px;
     float:left;
-    background-color: #C05125;
+    background-color: #DF4949;
     cursor: pointer;
 }
 
-/* memory */
-.memory{
+/*==============Quiz==================*/
+.quiz{
     background: 
     linear-gradient(135deg, #FFEFD5 25%, transparent 25%) -50px 0,
     linear-gradient(225deg, #FFEFD5 25%, transparent 25%) -50px 0,
@@ -22,7 +22,7 @@
     background-color: #DF4949;
 }
 
-.mHeader{
+.qHeader{
     
     width: 250px;
     height: 50px;
@@ -31,7 +31,7 @@
     margin: auto;
     
 }
-.mH1{
+.qH1{
     font-family: 'Roboto', sans-serif;
     margin: auto;
     color: #DF4949;
@@ -39,7 +39,7 @@
     font-size:30px;
 }
 
-.mSection{
+.qSection{
     margin: auto;
     box-shadow: 0 0 10px 4px rgba(0,0,0,.35);
     padding: 12px;
@@ -132,7 +132,7 @@
     background-color: #DF4949;    
 }
 
-.mTable{
+.qTable{
     display: table;
     margin: 0 auto;
 }
@@ -153,7 +153,7 @@ tr{
     display:none;
 }
 
-/* rss */
+/*=================rss====================*/
 
 .rssFeed{
     padding:4px;
@@ -180,4 +180,59 @@ tr{
     text-align:center;
     font-size:18px;
     background-color: #A0A09D;
+}
+
+/*==============memory=====================*/
+.memory{
+    width: 100%;
+    height: 100%;
+    background-color: #591225;
+    
+}
+
+.mMain{
+    background-color: #591225;
+    width: 200px;
+    height: 300px;
+    margin:auto;
+}
+.mH1{
+    text-align: center;
+    color: #ffffff;
+}
+
+.memory a p{
+    font-family: 'Roboto', sans-serif;
+    color: #FFFFFF;
+}
+.mHeader{
+    width: 200px;
+    height: 40px;
+    margin:auto;
+}
+
+.mGrid{
+    
+}
+
+.gridRow{
+    
+}
+
+.memory a{
+    height:0;
+    width:0;
+    padding:0;
+}
+
+.gridCell{
+    padding: 0px;
+    margin: 10px;
+    border: solid 4px;
+    border-color: #8C1C3A;
+}
+
+.memory img{
+    height: 40px;
+    width: 40px;
 }

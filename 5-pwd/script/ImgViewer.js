@@ -17,15 +17,15 @@ ImgViewer.prototype.getImg = function(obj) {
         }
     };
     
-    
-    obj.w.querySelector(".loadingImg").setAttribute("src", "pic/ajaxloader.gif"); // laddar animation
-    obj.w.querySelector(".loadingText").innerHTML = "Laddar"; // laddar text
+    obj.loadImg.setAttribute("src", "pic/ajaxloader.gif"); // laddar animation
+    obj.loadText.innerHTML = "Laddar"; // laddar text
     
     xhr.open("GET", "http://homepage.lnu.se/staff/tstjo/labbyServer/imgviewer/", true);
     xhr.send(null);
 };
 
-// laddar bilderna från en server och man kan sätta dom som bakgrunds bild om man vill
+// (laddar bilderna från en server och man kan sätta dom som bakgrunds bild om man vill) old
+// skapar element som ett grid dom fylls sedan med bilder.
 ImgViewer.prototype.presentImg = function (picArray, obj) {
     var ValueH = 0;
     var ValueW = 0;
@@ -58,7 +58,7 @@ ImgViewer.prototype.presentImg = function (picArray, obj) {
         
         obj.content.appendChild(div);
         
-        this.ViewImg(div, picArray[i].URL, picArray[i].width, picArray[i].height);
+        this.ViewImg(div, picArray[i].URL, picArray[i].width, picArray[i].height, obj);
     }
     
     // Tar fram högsta thumbHeight och högsta thumbWidth,
@@ -73,9 +73,16 @@ ImgViewer.prototype.presentImg = function (picArray, obj) {
 
 };
 
-// sätter bakgrunden på skrivbordet // öppnar bilden man klickar på i nytt fönster
-ImgViewer.prototype.ViewImg = function(div, url, w, h) {
+// sätter bakgrunden på skrivbordet // öppnar bilden man klickar på i nytt fönster // lägger den som en icon
+ImgViewer.prototype.ViewImg = function(div, url, w, h, obj) {
+    // öppnar bilden i ett nytt fönster
     div.addEventListener("click", function(){
-        new Desktop().loadImg(div, url, h, w, "pic/icon1.png", ViewImg, "Foto"); 
+        new ViewImg(new Window(url, obj.desktop, "Foto", null, h, w));
+    });
+    
+    // addar en desktop ikon till bilden på right klick
+    div.addEventListener("contextmenu", function(e) {
+        e.preventDefault();
+        obj.desktop.loadApp(url, ViewImg, "Foto", h, w);
     });
 };

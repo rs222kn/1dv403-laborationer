@@ -1,9 +1,18 @@
 "use strict";
 
-function Memory(obj, desk){
+function Quiz(obj, desk){
 
     var template = document.querySelector("#template");
-    var windowTemplate = template.content.querySelector(".memory");
+    var windowTemplate;
+    
+    // ie comp
+    var tmp = document.documentMode, e, isIE;
+    if(tmp){
+         windowTemplate = template.querySelector(".quiz");
+    }else{
+         windowTemplate = template.content.querySelector(".quiz");
+    }
+    
     this.m = windowTemplate.cloneNode(true);
     
     obj.content.appendChild(this.m); // lägger ut memory på 
