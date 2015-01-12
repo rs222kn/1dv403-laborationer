@@ -1,6 +1,6 @@
 "use strict";
 
-function Rss(obj){
+pwd.Rss = function (obj){
     
     this.intevall = undefined;
     this.getRssFeed(obj);
@@ -10,9 +10,9 @@ function Rss(obj){
     obj.w.querySelector(".appClose").addEventListener("click", function(){
         clearInterval(that.intevall);
     });
-}
+};
 
-Rss.prototype.update = function(obj) {
+pwd.Rss.prototype.update = function(obj) {
     var that = this;
     this.intevall = setInterval(function () {
         that.getRssFeed(obj); 
@@ -20,7 +20,7 @@ Rss.prototype.update = function(obj) {
     
 };
 
-Rss.prototype.getRssFeed = function(obj) {
+pwd.Rss.prototype.getRssFeed = function(obj) {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function(){
         if(xhr.readyState === 4){
@@ -30,10 +30,10 @@ Rss.prototype.getRssFeed = function(obj) {
                 obj.loadText.innerHTML = "klar"; // laddar text
                 obj.content.innerHTML =""; // tömmer gammalt content
                 
-                var parser = new DOMParser();
-                var feed = parser.parseFromString(xhr.responseText, "text/html");
-
-                obj.content.appendChild(feed.firstChild);
+                //var parser = new DOMParser(); // gör texten till html kod.
+                //var feed = parser.parseFromString(xhr.responseText, "text/html");
+                
+                obj.content.appendChild(xhr.responseXML.firstChild);
             }
         } 
     };
@@ -41,5 +41,6 @@ Rss.prototype.getRssFeed = function(obj) {
     obj.loadText.innerHTML = "Laddar"; // laddar text
     
     xhr.open("GET", "http://homepage.lnu.se/staff/tstjo/labbyServer/rssproxy/?url="+escape("http://www.dn.se/m/rss/senaste-nytt"));
+    xhr.responseType = "document";
     xhr.send(null);
 };

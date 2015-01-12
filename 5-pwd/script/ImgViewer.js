@@ -1,11 +1,11 @@
 "use strict";
 
-function ImgViewer(obj){
+pwd.ImgViewer =function (obj){
     this.getImg(obj);
-}
+};
 
 // laddar hämtar url's från server
-ImgViewer.prototype.getImg = function(obj) {
+pwd.ImgViewer.prototype.getImg = function(obj) {
     var that = this;
     var xhr =  new XMLHttpRequest();
     xhr.onreadystatechange = function () {
@@ -26,7 +26,7 @@ ImgViewer.prototype.getImg = function(obj) {
 
 // (laddar bilderna från en server och man kan sätta dom som bakgrunds bild om man vill) old
 // skapar element som ett grid dom fylls sedan med bilder.
-ImgViewer.prototype.presentImg = function (picArray, obj) {
+pwd.ImgViewer.prototype.presentImg = function (picArray, obj) {
     var ValueH = 0;
     var ValueW = 0;
     
@@ -74,15 +74,15 @@ ImgViewer.prototype.presentImg = function (picArray, obj) {
 };
 
 // sätter bakgrunden på skrivbordet // öppnar bilden man klickar på i nytt fönster // lägger den som en icon
-ImgViewer.prototype.ViewImg = function(div, url, w, h, obj) {
+pwd.ImgViewer.prototype.ViewImg = function(div, url, w, h, obj) {
     // öppnar bilden i ett nytt fönster
     div.addEventListener("click", function(){
-        new ViewImg(new Window(url, obj.desktop, "Foto", null, h, w));
+        new pwd.ViewImg(new pwd.Window(url, obj.desktop, "Foto", null, h, w));
     });
     
     // addar en desktop ikon till bilden på right klick
     div.addEventListener("contextmenu", function(e) {
         e.preventDefault();
-        obj.desktop.loadApp(url, ViewImg, "Foto", h, w);
+        obj.desktop.loadApp(url, pwd.ViewImg, "Foto", h, w);
     });
 };
