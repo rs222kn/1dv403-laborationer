@@ -1,5 +1,6 @@
 "use strict";
 
+var pwd = pwd || {};
 pwd.Quiz = function (obj, desk){
 
     var template = document.querySelector("#template");

@@ -1,5 +1,6 @@
 "use strict";
 
+var pwd = pwd || {};
 pwd.Memory = function (obj) {
     var template = document.querySelector("#template");
     // ie comp

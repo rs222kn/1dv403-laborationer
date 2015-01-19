@@ -1,5 +1,6 @@
 "use strict";
 
+var pwd = pwd || {};
 pwd.ViewImg = function (obj) {
     
     obj.content.style.backgroundImage = 'url('+obj.icon+')';

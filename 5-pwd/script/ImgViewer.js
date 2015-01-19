@@ -1,5 +1,6 @@
 "use strict";
 
+var pwd = pwd || {};
 pwd.ImgViewer =function (obj){
     this.getImg(obj);
 };
@@ -77,12 +78,12 @@ pwd.ImgViewer.prototype.presentImg = function (picArray, obj) {
 pwd.ImgViewer.prototype.ViewImg = function(div, url, w, h, obj) {
     // öppnar bilden i ett nytt fönster
     div.addEventListener("click", function(){
-        new pwd.ViewImg(new pwd.Window(url, obj.desktop, "Foto", null, h, w));
+        new pwd.ViewImg(new pwd.Window(url, obj.desktop, "Foto", {menu: false, menuItems: ["",""], menuListText: [[""]], resize: false}, h, w));
     });
     
     // addar en desktop ikon till bilden på right klick
     div.addEventListener("contextmenu", function(e) {
         e.preventDefault();
-        obj.desktop.loadApp(url, pwd.ViewImg, "Foto", h, w);
+        obj.desktop.loadApp(url, pwd.ViewImg, "Foto", {menu: false, menuItems: ["",""], menuListText: [[""]], resize: false}, h, w);
     });
 };

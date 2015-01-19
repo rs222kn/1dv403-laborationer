@@ -152,7 +152,33 @@ html, body{
             
             background-color: #31FF81;
         }
+    .menu{
+        float:left;
+        width:100%;
+        background-color: #F2F2F2;
+        border-bottom: 1px solid;
+    }
+    .menus{
+        float:left;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
     
+    
+    .menu ul{
+        margin:0;
+        padding:0;
+        background-color:#C6C6C3;
+        list-style-type: none;
+        padding:10px;
+        position:absolute;
+        z-index: 1;
+    }
+    
+    .menus ul li{
+        margin-top: 6px;
+        margin-bottom: 6px;
+    }
     /*Själva appen*/
     .content{
         background-size: cover;
@@ -192,7 +218,7 @@ html, body{
         }
         
         .rezise{
-            background-image:url('../pic/resize.png');
+            /*background-image:url('../pic/resize.png');*/
             float:right;
             padding:0;
             margin:0;
