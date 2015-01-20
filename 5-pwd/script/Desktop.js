@@ -6,7 +6,7 @@ pwd.Desktop = function (){
 };
 
 // laddar app iconer
-pwd.Desktop.prototype.loadApp = function (icon, app, name, prop, h, w) {
+pwd.Desktop.prototype.loadApp = function (icon, app, name, prop) {
     var that = this, a, img;
     
     // skapar element
@@ -24,6 +24,6 @@ pwd.Desktop.prototype.loadApp = function (icon, app, name, prop, h, w) {
     
     // öppnar app på klick
     a.addEventListener("click", function () {
-        new app(new pwd.Window(icon, that, name, prop, h, w)); // skickar information till app
+        new app(new pwd.Window(icon, that, name, prop)); // skickar information till app
     });
 };

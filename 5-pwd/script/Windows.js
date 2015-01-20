@@ -1,17 +1,17 @@
 "use strict";
     
 var pwd = pwd || {};
-pwd.Window = function (icon, desk, title, prop, h, w){
+pwd.Window = function (icon, desk, title, prop){
     // standard stoelekn på fönsterna
-    h = h || "300";
-    w = w || "260";
+    prop.height = prop.height || "300";
+    prop.width = prop.width || "260";
     
     this.prop = prop; // typ av fönster
     this.icon = icon; 
     this.desktop = desk;
     
-    this.height = h; // storlek
-    this.width = w;
+    this.height = prop.height; // storlek
+    this.width = prop.width;
     // positionen på fönstret
     this.posX = 0;
     this.posY = 0;
@@ -119,6 +119,9 @@ pwd.Window.prototype.menuHover = function (){
     
             eventStuff(i);
     }
+    
+    /*apply map and closurs here.*/
+    
     function eventStuff(j){
         that.menuElement.querySelectorAll("div")[j].addEventListener("mouseover", function(){
             that.showElement(that.menuElement.querySelectorAll("div")[j].querySelector("ul"));
@@ -253,7 +256,7 @@ pwd.Window.prototype.move = function () {
         var self = this;
         that.w.querySelector(".one").onmousedown = function(ev){
             var pos = that.getPosition(ev);// sjukt mycket dålig kod för att få en postition i ett fönster (den kortare versionen fungerar inte med this/that :'( )
-            
+            //this.style.cursor = "move";
             document.onmousemove = function(e) {
                 e = e || event;
                 self.style.left = e.pageX-pos[0] + 'px';
@@ -268,6 +271,9 @@ pwd.Window.prototype.move = function () {
             });
         };
     };
+    this.w.querySelector(".one").addEventListener("mousemove", function() {
+        //this.style.cursor = "hand";
+    });
 };
 
 // gör 'apparna' till fullScreen inom desktop.
